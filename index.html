@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VisuLiveSort | Sorting Algorithms Visualizer</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+</head>
+<body>
+    <header>
+        <div class="flex">
+            <h1>VisuLiveSort</h1>
+            <nav>
+                <ul class="flex">
+                    <li>Selection</li>
+                    <li>Insertion</li>
+                    <li>Bubble</li>
+                    <li>Merge</li>
+                    <li>Quick</li>
+                    <li>Counting</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Section -->
+    <section class="main-sec">
+        <div class="settings-box">
+
+        </div>
+        <div id="main-array flex">
+            
+        </div>
+        <div class="testcontainer">
+            <div class="testbox">
+                <div class="testing" id="test1"></div>
+                <div class="testing" id="test2"></div>
+                <div class="testing" id="test3"></div>
+                <div class="testing" id="test4"></div>
+                <div class="testing" id="test5"></div>
+                <div class="testing" id="test6"></div>
+                <div class="testing" id="test7"></div>
+                <div class="testing" id="test8"></div>
+            </div>
+            <button id="testbtn-1" class="btn m-3">test #1</button>
+            <button id="testbtn-2" class="btn m-3">test #2</button>
+
+            <div class="elem-container">
+                <div class="elem-bar" id="track"></div>
+                <div class="elem-circ" id="target"></div>
+            </div>
+
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+            
+            <link rel="stylesheet" href="css/test.css">
+            <script>
+                //For swap animation/transition
+                let trial1 = (e) => {
+                    document.getElementById('test6').classList.add('animate');
+                    console.log('OK');
+                };
+                let trial2 = (e) => {
+                    document.getElementById('test6').style.animation = "trial2 1s forwards";
+                    console.log('OK');
+                };
+                let clearTrial2 = e => {
+                    document.getElementById('test6').style.animation = 'none';
+                };
+                let trial3 = e => {
+                    document.getElementById('test6').style.right = '50px';
+                    document.getElementById('test6').style.backgroundColor = 'red';
+                }
+                let clearTrial3 = e => {
+                    document.getElementById('test6').style.right = '0px';
+                    document.getElementById('test6').style.backgroundColor = 'var(--main-purple)';
+                }
+
+                /***For dragging elements***
+                *!Functional, but noticeable CPU usage under continuous drag @ ~5% CPU load. May be enhanced.
+                *!!!Switch from using displayPort coordinates to using document-page coordinate (possibly by adding $window.scrollY)
+                *!Fix breaking bug occurring when window zoom level is changed after page load (possibly by refactoring and listen for zoom change events)
+                */
+                let offset = 0, prevPos = 0;
+                let target = document.getElementById('target');
+                let targetTrack = document.getElementById('track');
+                let trackInfo = targetTrack.getBoundingClientRect();
+                let highestPos = trackInfo.top;
+                let lowestPos = trackInfo.bottom;
+
+                //Assumes target's center shall be positioned at highestPos when it is at the highest position and be positioned at lowestPos when it is at the lowest position.
+                let smFinalOffset = 0 - target.getBoundingClientRect().height / 2;
+                let lgFinalOffset = smFinalOffset + trackInfo.height;
+
+                function dragInit(e) {
+                    e.preventDefault();
+
+                    //(1) Set initial $prevPos value. (2) Eliminates positional inconsistencies between mousedown on/clicking $target on top of area within $targetTrack and mousedown on/clicking $target on top area outside of $targetTrack.
+                    if (e.clientY > lowestPos) prevPos = lowestPos;
+                    else if (e.clientY > highestPos) prevPos = e.clientY;
+                    else prevPos = highestPos;
+
+                    document.onmouseup = dragFini;
+                    document.onmousemove = dragOn;
+                };
+
+                function dragOn(e) {
+                    e.preventDefault();
+
+                    //Prevents out-of-sync cursor-target relationship after cursor goes beyond targetTrack
+                    if (e.clientY > lowestPos) {
+                        offset = lowestPos - prevPos;
+                        prevPos = lowestPos;
+                    } else if (e.clientY > highestPos) {
+                        offset = e.clientY - prevPos;
+                        prevPos = e.clientY;
+                    } else {
+                        offset = highestPos - prevPos;
+                        prevPos = highestPos;
+                    }
+
+                    let finalOffset = target.offsetTop + offset; //Calculates the finalOffset value to be applied to CSS style
+
+                    // console.log(finalOffset); //DEBUG LINE
+
+                    //Clips any finalOffset values that place target beyond the bounds of targetTrack
+                    if (finalOffset < smFinalOffset) finalOffset = smFinalOffset;
+                    if (finalOffset > lgFinalOffset) finalOffset = lgFinalOffset;
+
+                    target.style.top = finalOffset + 'px'; //Applies CSS style
+                };
+
+                function dragFini(e) {
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                };
+
+                target.onmousedown = dragInit;
+            </script>
+        </div>
+    </section>
+
+    <!-- Bottom Controls Section -->
+    <section class="controls-sec">
+        <hr>
+        <div class="grid container">
+            <div class="control flex">
+                <label for="manual-array">Manual<br>Input Array</label>
+                <input type="text" name="manual-array" id="manual-array" class="m-12px">
+                <button class="btn">GO!</button>
+            </div>
+            <div class="control flex">
+                <span>New Random<br>Array</span>
+                <button class="btn m-12px">GO!</button>
+            </div>
+            <div class="control">
+                <span>Resuffle</span>
+                <button class="btn m-12px">GO!</button>
+            </div>
+            <div class="control">
+                <span>Start Sort</span>
+                <button class="btn m-12px">GO!</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer">Copyright &copy; microQZR 2021</div>
+    </footer>
+</body>
+</html>

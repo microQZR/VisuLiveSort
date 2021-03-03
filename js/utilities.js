@@ -35,6 +35,10 @@ let lowestPos = trackInfo.bottom + window.scrollY; //$trackInfo.bottom is viewpo
 let smFinalOffset = 0 - target.getBoundingClientRect().height / 2;
 let lgFinalOffset = smFinalOffset + trackInfo.height;
 
+//Define a globally accessible variable to hold the slider value
+let sliderVal = 0;
+
+//Drag action initialization event handler
 function dragInit(e) {
     e.preventDefault();
 
@@ -47,6 +51,7 @@ function dragInit(e) {
     document.onmousemove = dragOn;
 };
 
+//Drag action core event handler
 function dragOn(e) {
     e.preventDefault();
 
@@ -64,8 +69,6 @@ function dragOn(e) {
 
     let finalOffset = target.offsetTop + offset; //Calculates the finalOffset value to be applied to CSS style
 
-    // console.log(finalOffset); //DEBUG LINE
-
     //Clips any finalOffset values that place target beyond the bounds of targetTrack
     if (finalOffset < smFinalOffset) finalOffset = smFinalOffset;
     if (finalOffset > lgFinalOffset) finalOffset = lgFinalOffset;
@@ -73,9 +76,10 @@ function dragOn(e) {
     target.style.top = finalOffset + 'px'; //Applies CSS style
 };
 
+//Drag action termination event handler
 function dragFini(e) {
     document.onmouseup = null;
     document.onmousemove = null;
 };
 
-target.onmousedown = dragInit;
+target.onmousedown = dragInit; //Attaching the drag action initializer to $target

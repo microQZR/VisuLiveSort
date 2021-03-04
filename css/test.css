@@ -1,6 +1,6 @@
 .elem-container {
-    /* width: 30px; */
-    /* height: 120px; */
+    width: 30px;
+    height: 100px;
     background-color: var(--main-blue);
     margin: 15px 300px;
     position: relative;
@@ -10,7 +10,8 @@
     width: 10px;
     height: 100px;
     background-color: var(--main-green);
-    /* position: absolute; */
+    position: absolute;
+    bottom: 0px;
     /* top: 20px; */
     /* left: 10px; */
 }
@@ -19,7 +20,7 @@
     width: 14px;
     height: 14px;
     background-color: var(--main-purple);
-    border-radius: 50%;
+    /* border-radius: 50%; */
     position: absolute;
     top: -7px;
     left: -2px;

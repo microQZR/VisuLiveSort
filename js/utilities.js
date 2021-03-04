@@ -24,9 +24,15 @@ let clearTrial3 = e => {
 /*** For dragging elements ***
 *!Functional, but noticeable CPU usage under continuous drag @ ~5% CPU load. May be enhanced.
 */
+
+//Extra/non-core components
+let elemBar = document.getElementById('elem-bar');
+let elemBarDimen = elemBar.getBoundingClientRect();
+
+//CORE components
 let offset = 0, prevPos = 0;
-let target = document.getElementById('target');
-let targetTrack = document.getElementById('track');
+let target = document.getElementById('target'); //ATM the slider thumb is an HTML element with id="target"
+let targetTrack = document.getElementById('track'); //ATM the slider track is an HTML element with id="track"
 let trackInfo = targetTrack.getBoundingClientRect();
 let highestPos = trackInfo.top + window.scrollY; //$trackInfo.top is viewport coordinate; adding $window.scrollY converts it to document-page coordinate
 let lowestPos = trackInfo.bottom + window.scrollY; //$trackInfo.bottom is viewport coordinate; adding $window.scrollY converts it to document-page coordinate
@@ -43,8 +49,8 @@ function dragInit(e) {
     e.preventDefault();
 
     //(1) Set initial $prevPos value. (2) Eliminates positional inconsistencies between mousedown on/clicking $target on top of area within $targetTrack and mousedown on/clicking $target on top area outside of $targetTrack.
-    if (e.clientY + window.scrollY > lowestPos) prevPos = lowestPos;
-    else if (e.clientY + window.scrollY > highestPos) prevPos = e.clientY + window.scrollY;
+    if (e.pageY > lowestPos) prevPos = lowestPos;
+    else if (e.pageY > highestPos) prevPos = e.pageY;
     else prevPos = highestPos;
 
     document.onmouseup = dragFini;
@@ -55,17 +61,22 @@ function dragInit(e) {
 function dragOn(e) {
     e.preventDefault();
 
-    //Prevents out-of-sync cursor-target relationship after cursor goes beyond targetTrack
-    if (e.clientY + window.scrollY > lowestPos) {
+    //(1) Calculates $offset value and sets $prevPos for the next "mousemove" event. (2) Prevents out-of-sync cursor-target relationship after cursor goes beyond targetTrack. (3) Calculates $sliderVal value, which ranges from 0 to 1.
+    if (e.pageY > lowestPos) {
         offset = lowestPos - prevPos;
         prevPos = lowestPos;
-    } else if (e.clientY + window.scrollY > highestPos) {
-        offset = e.clientY + window.scrollY - prevPos;
-        prevPos = e.clientY + window.scrollY;
+        sliderVal = 0;
+    } else if (e.pageY >= highestPos) {
+        offset = e.pageY - prevPos;
+        prevPos = e.pageY;
+        sliderVal = (lowestPos - e.pageY) / trackInfo.height;
     } else {
         offset = highestPos - prevPos;
         prevPos = highestPos;
+        sliderVal = 1;
     }
+
+    // console.log(sliderVal); //DEBUG LINE//OK PASSED TEST
 
     let finalOffset = target.offsetTop + offset; //Calculates the finalOffset value to be applied to CSS style
 
@@ -74,6 +85,7 @@ function dragOn(e) {
     if (finalOffset > lgFinalOffset) finalOffset = lgFinalOffset;
 
     target.style.top = finalOffset + 'px'; //Applies CSS style
+    elemBar.style.height = elemBarDimen.height * sliderVal + 'px';
 };
 
 //Drag action termination event handler

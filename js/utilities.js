@@ -21,7 +21,7 @@ let clearTrial3 = e => {
 
 
 
-/*** For dragging elements ***
+/*** For slider drag action ***
 *!Functional, but noticeable CPU usage under continuous drag @ ~5% CPU load. May be enhanced.
 */
 
@@ -95,3 +95,95 @@ function dragFini(e) {
 };
 
 target.onmousedown = dragInit; //Attaching the drag action initializer to $target
+
+
+
+/*** For drag-sort drag action ***/
+
+// let arrElemCount = 10; //The variable is currently not. Preserved for possible future usage.
+let arrElemGap = 5;
+let arrElemWidth = 20;
+let valsToSort = [23, 1, 72, 95, 4, 36, 59, 41, 55, 32];
+let elems = [...document.querySelectorAll('.testing')]; //A bijection exists between $elems and $valsToSort, whereby indices of $valsToSort topologically maps to the relative position of each elements of $elems within the bounds of "div.testbox-inner".
+elems.forEach(elemStylePositioner); //Initially places the unsorted DOM elements within their DOM container
+
+/* CORE components below until end of section */
+let elemsContainerDimen = document.querySelector('.testbox-inner').getBoundingClientRect();
+let oldIndex = 0;
+let offset2 = 0;
+let prevPos2 = 0;
+let target2 = null;
+
+//Utility function which adjusts the style of a given DOM element based on a given position
+function elemStylePositioner(elem, pos) { elem.style.left = `${pos * (arrElemWidth + arrElemGap)}px`; };
+
+//Utility function which updates the position of elements within $elems and $valsToSort arrays upon a drag-sort action
+function arraysUpdateOnDrag(oldIndex, newIndex) {
+    elems.splice(newIndex, 0, ...elems.splice(oldIndex, 1));
+    valsToSort.splice(newIndex, 0, ...valsToSort.splice(oldIndex,1));
+};
+
+//Drag-sort action initialization event handler
+let dragSortInit = function(e) {
+    e.preventDefault();
+
+    prevPos2 = e.pageX;
+    oldIndex = Math.floor((e.pageX - elemsContainerDimen.left) / (arrElemWidth + arrElemGap));
+    target2 = this; //Registers the active DOM element being dragged 
+
+    //Sets special CSS style for the active DOM element being dragged
+    target2.style.zIndex = 100;
+    target2.style.boxShadow = '0px 0px 5px 5px var(--main-green)';
+    target2.style.transition = 'none';
+
+    //Attaches subcomponent event handlers
+    document.onmouseup = dragSortFini;
+    document.onmousemove = dragSortOn;
+};
+
+//Drag-sort action core event handler
+function dragSortOn(e) {
+    e.preventDefault();
+    
+    if (e.clientX <= elemsContainerDimen.left || e.clientX >= elemsContainerDimen.right) return; //This bounds the drag-sort motion of the active DOM element to within its DOM container.
+
+    //***DEPRECATED. The following segment is not needed
+    // //Below is for the <<motion>> of the selected DOM element
+    // offset2 = e.pageX - prevPos2; //Calculates the delta offset2
+    // prevPos2 = e.pageX; //Sets the $prevPos2 value for use for the next event
+
+    // let finalOffset = target2.offsetLeft + offset2;
+    // target2.style.left = finalOffset + 'px'; //Applies CSS style
+    //***
+
+    //Below is for the proper positioning of all affected DOM elements upon drag over
+    let newIndex = Math.floor((e.pageX - elemsContainerDimen.left) / (arrElemWidth + arrElemGap));
+    elemStylePositioner(target2, newIndex); //Updates the position of the active DOM element.
+    //Update the position of the non-active DOM elements !ONLY! if the value of $newIndex has changed in order to save some compute.
+    if (oldIndex !== newIndex) {
+        if (newIndex <= oldIndex) {
+            for (let i = newIndex; i < oldIndex; i++) {
+                elemStylePositioner(elems[i], i + 1);
+            };
+        } else {
+            for (let i = newIndex; i > oldIndex; i--) {
+                elemStylePositioner(elems[i], i - 1);
+            };
+        }
+        arraysUpdateOnDrag(oldIndex, newIndex);
+        oldIndex = newIndex;
+    }
+};
+
+//Drag action core event handler
+let dragSortFini = function(e) {
+    //Detach subcomponent event handlers
+    document.onmouseup = null;
+    document.onmousemove = null;
+    //Restore initial CSS styles
+    target2.style.zIndex = "auto";
+    target2.style.boxShadow = "none";
+    target2.style.transition = "0.5s ease-out";
+};
+
+elems.forEach(elem => { elem.onmousedown = dragSortInit; }); //Attaching the drag-sort action initialization event handler to each array element of $elems

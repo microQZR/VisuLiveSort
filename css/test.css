@@ -1,3 +1,4 @@
+/* Testing Slider */
 .elem-container {
     width: 30px;
     height: 100px;
@@ -26,3 +27,56 @@
     left: -2px;
 }
 
+/* Testing Drag-sort */
+.testbox-outer {
+    background-color: rgb(51, 167, 255);
+    background-image:
+      linear-gradient(rgba(255,255,255,.5) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(255,255,255,.5) 2px, transparent 2px),
+      linear-gradient(rgba(255,255,255,.28) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    overflow: auto;
+}
+
+.testbox-inner {
+    margin: 45px auto;
+    position: relative;
+    border: 1px solid var(--main-green);
+    height: 142px;
+    /* Below is the correct min-width to be used for actual application; */
+    /* min-width: 200px; */
+    /* Below is the correct width to be used for actual application */
+    /* width: 80%; */
+    /* Below is the width for testing only */
+    width: 250px;
+}
+
+.testing {
+    /* margin: 0 5px; */
+    background-color: #7926ff;
+    width: 20px;
+    height: 140px;
+    display: inline-block;
+    position: absolute;
+    transition: 0.5s ease-out;
+    right: 0;
+    color: white;
+    text-align: center;
+}
+
+#test6.animate {
+    right: 50px;
+    background-color: red;
+}
+
+@keyframes trial2 {
+    0% {
+        right: 0;
+    }
+    100% {
+        right: 50px;
+        background-color: red;
+    }
+}

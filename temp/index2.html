@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VisuLiveSort | Sorting Algorithms Visualizer</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+</head>
+<body>
+    <header class="flex">
+        <div class="flex container">
+            <h1>VisuLiveSort</h1>
+            <nav>
+                <ul class="flex">
+                    <li>Selection</li>
+                    <li>Insertion</li>
+                    <li>Bubble</li>
+                    <li>Merge</li>
+                    <li>Quick</li>
+                    <li>Counting</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Section -->
+    <section class="main-sec flex">
+        <div class="main-sec-container container flex">
+            <div class="settings-box">
+                <div id="settings-toggle"></div>
+            </div>
+            <div id="main-array" class="testbox-inner">
+                <div class="testing" id="test1">23</div>
+                <div class="testing" id="test2">1</div>
+                <div class="testing" id="test3">72</div>
+                <div class="testing" id="test4">95</div>
+                <div class="testing" id="test5">4</div>
+                <div class="testing" id="test6">36</div>
+                <div class="testing" id="test7">59</div>
+                <div class="testing" id="test8">41</div>
+                <div class="testing" id="test9">55</div>
+                <div class="testing" id="test10">32</div>
+                <link rel="stylesheet" href="css/test.css">
+            </div>
+            <div class="elem-container" id="track">
+                <div class="elem-bar" id="elem-bar"></div>
+                <div class="elem-circ" id="target"></div>
+            </div>
+        </div>
+        
+            
+        <!-- <div class="testcontainer">
+            <div class="testbox-outer">
+                <div class="testbox-inner">
+                    <div class="testing" id="test1">23</div>
+                    <div class="testing" id="test2">1</div>
+                    <div class="testing" id="test3">72</div>
+                    <div class="testing" id="test4">95</div>
+                    <div class="testing" id="test5">4</div>
+                    <div class="testing" id="test6">36</div>
+                    <div class="testing" id="test7">59</div>
+                    <div class="testing" id="test8">41</div>
+                    <div class="testing" id="test9">55</div>
+                    <div class="testing" id="test10">32</div>
+                </div>
+            </div>
+            <button id="testbtn-1" class="btn m-3">test #1</button>
+            <button id="testbtn-2" class="btn m-3">test #2</button>
+
+            <div class="elem-container" id="track">
+                <div class="elem-bar" id="elem-bar"></div>
+                <div class="elem-circ" id="target"></div>
+            </div>
+
+            <link rel="stylesheet" href="css/test.css">
+        </div> -->
+    </section>
+
+    <!-- Bottom Controls Section -->
+    <section class="controls-sec">
+        <hr class="container">
+        <div class="grid container">
+            <div class="control flex">
+                <label for="manual-array">Manual<br>Input Array</label>
+                <input type="text" name="manual-array" id="manual-array" class="m-12px">
+                <button class="btn">GO!</button>
+            </div>
+            <div class="control flex">
+                <span>New Random<br>Array</span>
+                <button class="btn m-12px">GO!</button>
+            </div>
+            <div class="control">
+                <span>Resuffle</span>
+                <button class="btn m-12px">GO!</button>
+            </div>
+            <div class="control">
+                <span>Start Sort</span>
+                <button class="btn m-12px">GO!</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer">Copyright &copy; microQZR 2021</div>
+    </footer>
+</body>
+<script src="js/utilities.js"></script>
+</html>

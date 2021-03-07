@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root {
+    --main-purple: #6300ff;
+    --main-blue: #40c6ff;
+    --main-yellow: #ffee00;
+    --main-green: #00ffbd;
+    --main-magenta: #ff0095;
+}
+
+/* General */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* Header & Navbar */
+header {
+    background-color: var(--main-purple);
+    overflow: auto;
+    height: 12vh;
+}
+
+header .flex {
+    margin: auto;
+    height: 65%;
+    color: white;
+    background-color: #36008c;
+    padding: 10px 50px;
+    border-radius: 10px;
+}
+
+header .flex li {
+    margin-left: 20px;
+    padding-left: 20px;
+    font-weight: 500;
+    border-left: white 1px solid;
+}
+
+header .flex li:first-child {
+    border-left: none;
+}
+
+header .flex {
+    justify-content: space-between;
+}
+
+/* Main Section */
+.main-sec {
+    height: 68vh;
+}
+
+.main-sec-container {
+    position: relative;
+    background-color: #00ffbb41;
+    height: 80%;
+    /* margin: auto; //Not needed due to "display: flex" on parent*/
+}
+
+#main-array {
+    background-color: var(--main-blue);
+    /* height: 80%;
+    width: 80%; */
+}
+
+.settings-box {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    width: 300px;
+    height: 300px;
+    background-color: rgba(255, 0, 0, 0.356);
+}
+
+#settings-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(255, 255, 0, 0.507);
+}
+
+/* Bottom Controls */
+.controls-sec {
+    height: 15vh;
+    /* border: 1px solid blue; */
+}
+
+.controls-sec hr {
+    margin: 0 auto;
+    color: #c4c4c4;
+}
+
+.controls-sec .grid {
+    grid-template-columns: 2.5fr 1fr 1fr 1fr;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.control {
+    margin: 0 20px;
+    text-align: right;
+}
+
+#manual-array {
+    width: 250px;
+    border: none;
+    border-bottom: #0194FF 2px solid;
+}
+
+#manual-array:focus {
+    outline: none;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    font-size: 10px;
+    margin: auto;
+}
+
+footer {
+    height: 5vh;
+    /* border: 1px solid red; */
+}
+
+/* Utilities */
+.container {
+    width: 80%;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+}
+
+.btn {
+    background-color: var(--main-blue);
+    color: white;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    /* border: #318bff 2px solid; */
+    background-color: #006fff;
+    transform: scale(0.96);
+    /* border: var(--main-green) 2px solid; */
+}
+
+.btn:active {
+    box-shadow: inset 0 0 5px 0px #fff;
+    border: none
+}
+
+/* Margin */
+.my-1 {
+    margin: 1rem 0;
+}
+
+.my-2 {
+    margin: 1.5rem 0;
+}
+
+.my-3 {
+    margin: 2rem 0;
+}
+
+.m-12px {
+    margin: 12px;
+}
+
+.m-1 {
+    margin: 1rem;
+}
+
+.m-2 {
+    margin: 1.5rem;
+}
+
+.m-3 {
+    margin: 2rem;
+}
+
+/* Padding */
+.py-1 {
+    padding: 1rem 0;
+}
+
+.py-2 {
+    padding: 1.5rem 0;
+}
+
+.py-3 {
+    padding: 2rem 0;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.p-2 {
+    padding: 1.5rem;
+}
+
+.p-3 {
+    padding: 2rem;
+}

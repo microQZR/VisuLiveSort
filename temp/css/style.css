@@ -59,10 +59,11 @@ header .flex {
     height: 68vh;
 }
 
-.main-sec-container {
+.main-sec .main-sec-container {
     position: relative;
     background-color: #00ffbb41;
     height: 80%;
+    width: 70%;
     /* margin: auto; //Not needed due to "display: flex" on parent*/
 }
 

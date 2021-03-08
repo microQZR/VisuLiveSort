@@ -1,9 +1,5 @@
-.testcontainer {
-    visibility: hidden;
-}
-
 /* Testing Slider */
-.elem-container {
+.slider-container {
     width: 30px;
     height: 100px;
     background-color: var(--main-blue);
@@ -14,7 +10,7 @@
     opacity: 20%;
 }
 
-.elem-bar {
+.slider-bar {
     width: 10px;
     height: 100px;
     background-color: var(--main-green);
@@ -24,7 +20,7 @@
     /* left: 10px; */
 }
 
-.elem-circ {
+.slider-circ {
     width: 14px;
     height: 14px;
     background-color: var(--main-purple);
@@ -47,24 +43,24 @@
     overflow: auto;
 }
 
-.testbox-inner {
+.main-array-box {
     margin: 45px auto;
     position: relative;
     /* border: 1px solid var(--main-green); */
-    height: 142px;
+    height: 280px;
     /* Below is the correct min-width to be used for actual application; */
     /* min-width: 200px; */
     /* Below is the correct width to be used for actual application */
     /* width: 80%; */
     /* Below is the width for testing only */
-    width: 250px;
+    width: 100%;
 }
 
-.testing {
+.array-item {
     /* margin: 0 5px; */
     background-color: #7926ff;
-    width: 20px;
-    height: 140px;
+    width: 30px;
+    height: 280px;
     display: inline-block;
     position: absolute;
     transition: 0.5s ease-out;

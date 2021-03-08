@@ -6,6 +6,7 @@
     <title>VisuLiveSort | Sorting Algorithms Visualizer</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' href='css/style.css'>
+    <link rel="stylesheet" href="css/test.css">
 </head>
 <body>
     <header class="flex">
@@ -30,47 +31,137 @@
             <div class="settings-box">
                 <div id="settings-toggle"></div>
             </div>
-            <div id="main-array" class="testbox-inner">
-                <div class="testing" id="test1">23</div>
-                <div class="testing" id="test2">1</div>
-                <div class="testing" id="test3">72</div>
-                <div class="testing" id="test4">95</div>
-                <div class="testing" id="test5">4</div>
-                <div class="testing" id="test6">36</div>
-                <div class="testing" id="test7">59</div>
-                <div class="testing" id="test8">41</div>
-                <div class="testing" id="test9">55</div>
-                <div class="testing" id="test10">32</div>
-                <link rel="stylesheet" href="css/test.css">
+            <div id="main-array" class="main-array-box">
+                <div class="array-item" id="test1">23</div>
+                <div class="array-item" id="test2">1</div>
+                <div class="array-item" id="test3">72</div>
+                <div class="array-item" id="test4">95</div>
+                <div class="array-item" id="test5">4</div>
+                <div class="array-item" id="test6">36</div>
+                <div class="array-item" id="test7">59</div>
+                <div class="array-item" id="test8">41</div>
+                <div class="array-item" id="test9">55</div>
+                <div class="array-item" id="test10">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test20">32</div>
+                <!-- <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test30">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test40">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test50">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test60">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test70">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test80">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test90">32</div>
+                <div class="array-item">23</div>
+                <div class="array-item">1</div>
+                <div class="array-item">72</div>
+                <div class="array-item">95</div>
+                <div class="array-item">4</div>
+                <div class="array-item">36</div>
+                <div class="array-item">59</div>
+                <div class="array-item">41</div>
+                <div class="array-item">55</div>
+                <div class="array-item" id="test100">32</div> -->
+
             </div>
-            <div class="elem-container" id="track">
-                <div class="elem-bar" id="elem-bar"></div>
-                <div class="elem-circ" id="target"></div>
+            <div class="slider-container" id="track">
+                <div class="slider-bar" id="slider-bar"></div>
+                <div class="slider-circ" id="target"></div>
             </div>
         </div>
         
             
         <!-- <div class="testcontainer">
             <div class="testbox-outer">
-                <div class="testbox-inner">
-                    <div class="testing" id="test1">23</div>
-                    <div class="testing" id="test2">1</div>
-                    <div class="testing" id="test3">72</div>
-                    <div class="testing" id="test4">95</div>
-                    <div class="testing" id="test5">4</div>
-                    <div class="testing" id="test6">36</div>
-                    <div class="testing" id="test7">59</div>
-                    <div class="testing" id="test8">41</div>
-                    <div class="testing" id="test9">55</div>
-                    <div class="testing" id="test10">32</div>
+                <div class="main-array-box">
+                    <div class="array-item" id="test1">23</div>
+                    <div class="array-item" id="test2">1</div>
+                    <div class="array-item" id="test3">72</div>
+                    <div class="array-item" id="test4">95</div>
+                    <div class="array-item" id="test5">4</div>
+                    <div class="array-item" id="test6">36</div>
+                    <div class="array-item" id="test7">59</div>
+                    <div class="array-item" id="test8">41</div>
+                    <div class="array-item" id="test9">55</div>
+                    <div class="array-item" id="test10">32</div>
                 </div>
             </div>
             <button id="testbtn-1" class="btn m-3">test #1</button>
             <button id="testbtn-2" class="btn m-3">test #2</button>
 
-            <div class="elem-container" id="track">
-                <div class="elem-bar" id="elem-bar"></div>
-                <div class="elem-circ" id="target"></div>
+            <div class="slider-container" id="track">
+                <div class="slider-bar" id="slider-bar"></div>
+                <div class="slider-circ" id="target"></div>
             </div>
 
             <link rel="stylesheet" href="css/test.css">

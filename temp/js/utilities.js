@@ -26,8 +26,8 @@ let clearTrial3 = e => {
 */
 
 //Extra/non-core components
-let elemBar = document.getElementById('elem-bar');
-let elemBarDimen = elemBar.getBoundingClientRect();
+let sliderBar = document.getElementById('slider-bar');
+let sliderBarDimen = sliderBar.getBoundingClientRect();
 
 //CORE components
 let offset = 0, prevPos = 0;
@@ -85,7 +85,7 @@ function dragOn(e) {
     if (finalOffset > lgFinalOffset) finalOffset = lgFinalOffset;
 
     target.style.top = finalOffset + 'px'; //Applies CSS style
-    elemBar.style.height = elemBarDimen.height * sliderVal + 'px';
+    sliderBar.style.height = sliderBarDimen.height * sliderVal + 'px';
 };
 
 //Drag action termination event handler
@@ -98,17 +98,54 @@ target.onmousedown = dragInit; //Attaching the drag action initializer to $targe
 
 
 
+/*** For main DOM array generation and sizing ***/
+
+//The following line declares independent variables for determining the main array's dimensions
+let minWidth = 10, minGap = 5, minCount = 10, maxWidth = 30;
+
+let containerMaxWidth = document.querySelector('.main-sec-container').offsetWidth;
+let arrSizeSliderVal = 0; //IMPORTANT - Effective main-array size controller
+let maxCount = containerMaxWidth / (minWidth + minGap);
+
+//The following lines declare the (computed) main variables of interest for determining the main array's dimensions
+let count = (maxCount - minCount) * arrSizeSliderVal + minCount;
+let width = minWidth * (maxCount / ((2 - arrSizeSliderVal) * count)) < maxWidth ? minWidth * (maxCount / ((2 - arrSizeSliderVal) * count)) : maxWidth;
+let gap = Math.ceil(width / 2 + (5 * (1 - arrSizeSliderVal)));
+count -= 3 * arrSizeSliderVal; //Adjustment code to make sure main array elements don't protrude div#main-array.main-array-box
+
+//For generating the main array of poper dimensions
+let mainArrayBox = document.querySelector('.main-array-box'); //Selects the old div#main-array.main-array-box to be replaced
+let arrElementHtml = `<div class="array-item" style="width: ${width}px">00</div>` //HTML content of main array elements to be inserted into div#main-array.main-array-box
+
+let newArrayBox = mainArrayBox.cloneNode(false);
+newArrayBox.style.width = arrSizeSliderVal == 0 ? Math.floor(count) * (width + gap) - gap + 'px' : Math.floor(count + 1) * (width + gap) - gap + 'px'; //Set the CSS width of the new div#main-array.main-array-box
+newArrayBox.innerHTML = arrElementHtml; //This statement and the next populates the new div#main-array.main-array-box with the right number of child elements
+for (let i = 1; i < count; i++) {
+    newArrayBox.insertAdjacentHTML('beforeend', arrElementHtml);
+}
+mainArrayBox.parentNode.replaceChild(newArrayBox, mainArrayBox); //Replaces the old div#main-array.main-array-box with the new one in the DOM tree
+
+//DEBUG LINES BELOW
+console.log("arrSizeSliderVal: ", arrSizeSliderVal);
+console.log("count: ", count);
+console.log("real count: ", document.getElementById('main-array').childElementCount);
+console.log("width: ", width);
+console.log("gap: ", gap);
+//DEBUG SECTION END
+
+
+
 /*** For drag-sort drag action ***/
 
 // let arrElemCount = 10; //The variable is currently not. Preserved for possible future usage.
-let arrElemGap = 5;
-let arrElemWidth = 20;
+let arrElemGap = gap;
+let arrElemWidth = width;
 let valsToSort = [23, 1, 72, 95, 4, 36, 59, 41, 55, 32];
-let elems = [...document.querySelectorAll('.testing')]; //A bijection exists between $elems and $valsToSort, whereby indices of $valsToSort topologically maps to the relative position of each elements of $elems within the bounds of "div.testbox-inner".
+let elems = [...document.querySelectorAll('.array-item')]; //A bijection exists between $elems and $valsToSort, whereby indices of $valsToSort topologically maps to the relative position of each elements of $elems within the bounds of "div.main-array-box".
 elems.forEach(elemStylePositioner); //Initially places the unsorted DOM elements within their DOM container
 
 /* CORE components below until end of section */
-let elemsContainerDimen = document.querySelector('.testbox-inner').getBoundingClientRect();
+let elemsContainerDimen = document.querySelector('.main-array-box').getBoundingClientRect();
 let oldIndex = 0;
 let offset2 = 0;
 let prevPos2 = 0;

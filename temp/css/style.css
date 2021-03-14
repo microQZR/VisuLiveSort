@@ -123,6 +123,25 @@ header .flex {
     outline: none;
 }
 
+#manual-array.invalid {
+    outline: 1.5px solid red;
+}
+
+#manual-array-fs {
+    position: relative;
+    outline: none;
+    border: 0px solid;
+}
+
+#manual-array-fs > legend {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    font-size: 12px;
+    color: red;
+    visibility: hidden;
+}
+
 /* Footer */
 .footer {
     text-align: center;

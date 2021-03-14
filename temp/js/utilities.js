@@ -13,11 +13,11 @@ let clearTrial2 = e => {
 let trial3 = e => {
     document.getElementById('test6').style.right = '50px';
     document.getElementById('test6').style.backgroundColor = 'red';
-}
+};
 let clearTrial3 = e => {
     document.getElementById('test6').style.right = '0px';
     document.getElementById('test6').style.backgroundColor = 'var(--main-purple)';
-}
+};
 
 
 
@@ -72,23 +72,21 @@ function dragFini(e) {
 };
 
 //Attaching initialization event handlers
-let sliderHandles = document.querySelectorAll('.slider-handle'); //Getting all DOM elements with class="slider-handle"
-sliderHandles.forEach((element) => element.onmousedown = dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
+document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
 
 
 
 /*** For drag-sort drag action ***/
 
+//Declaration and definition of tweakable, independent variables
 let arrElemGap = gap; //**IMPORTANT** $gap is declared in "script.js"
 let arrElemWidth = width; //**IMPORTANT** $width is declared in "script.js"
 let valsToSort = randNumArray //**IMPORTANT** $randNumArray is declared in "script.js"
-let elems = [...document.querySelectorAll('.drag-sort-handle')]; //A bijection exists between $elems and $valsToSort, whereby indices of $valsToSort topologically maps to the relative position of each elements of $elems within the bounds of "div.main-array-box".
-elems.forEach(elemStylePositioner); //Initially places the unsorted DOM elements within their DOM container
 
-/* CORE components below until end of section */
+//Declaration and definition of non-tweakable variables
+let elems = [...document.querySelectorAll('.drag-sort-handle')]; //A bijection exists between $elems and $valsToSort, whereby indices of $valsToSort topologically maps to the relative position of each elements of $elems within the bounds of "div.main-array-box".
 let elemsContainerDimen = document.querySelector('.main-array-box').getBoundingClientRect();
-let oldIndex = 0;
-let target2 = null;
+let oldIndex, target2;
 
 //Utility function which adjusts the style of a given DOM element's !PARENT! based on a given position and updates that parent element's "data-currentindex" attribute
 function elemStylePositioner(elem, pos) {
@@ -103,7 +101,7 @@ function arraysUpdateOnDrag(oldIndex, newIndex) {
 };
 
 //Drag-sort action initialization event handler
-let dragSortInit = function(e) {
+function dragSortInit(e) {
     e.preventDefault();
 
     oldIndex = Math.floor((e.pageX - elemsContainerDimen.left) / (arrElemWidth + arrElemGap));
@@ -125,7 +123,6 @@ function dragSortOn(e) {
     
     if (e.clientX <= elemsContainerDimen.left || e.clientX >= elemsContainerDimen.right) return; //This bounds the drag-sort motion of the active DOM element to within its DOM container.
 
-
     //Below is for the proper positioning of all affected DOM elements upon drag over
     let newIndex = Math.floor((e.pageX - elemsContainerDimen.left) / (arrElemWidth + arrElemGap));
     elemStylePositioner(target2, newIndex); //Updates the position of the active DOM element.
@@ -146,7 +143,7 @@ function dragSortOn(e) {
 };
 
 //Drag-sort action termination event handler
-let dragSortFini = function(e) {
+function dragSortFini(e) {
     //Detach subcomponent event handlers
     document.onmouseup = null;
     document.onmousemove = null;
@@ -156,4 +153,7 @@ let dragSortFini = function(e) {
     target2.style.boxShadow = "none";
 };
 
+
+//Actually executing previously defined code
+elems.forEach(elemStylePositioner); //Initially places the unsorted DOM elements within their DOM container
 elems.forEach(elem => { elem.onmousedown = dragSortInit; }); //Attaching the drag-sort action initialization event handler to each array element of $elems

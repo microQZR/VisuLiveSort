@@ -96,22 +96,25 @@
     <section class="controls-sec">
         <hr class="container">
         <div class="grid container">
-            <div class="control flex">
+            <form class="control flex" id="manual-array-form">
                 <label for="manual-array">Manual<br>Input Array</label>
-                <input type="text" name="manual-array" id="manual-array" class="m-12px">
-                <button class="btn">GO!</button>
-            </div>
+                <fieldset id="manual-array-fs">
+                    <legend>Input is invalid!</legend>
+                    <input type="text" name="manual-array" id="manual-array" class="m-12px">
+                </fieldset>
+                <button type="submit" class="btn" id="manual-array-btn">GO!</button>
+            </form>
             <div class="control flex">
                 <span>New Random<br>Array</span>
-                <button class="btn m-12px">GO!</button>
+                <button class="btn m-12px" id="nra-btn">GO!</button>
             </div>
             <div class="control">
-                <span>Resuffle</span>
-                <button class="btn m-12px">GO!</button>
+                <span>Reshuffle</span>
+                <button class="btn m-12px" id="reshuffle-btn">GO!</button>
             </div>
             <div class="control">
                 <span>Start Sort</span>
-                <button class="btn m-12px">GO!</button>
+                <button class="btn m-12px" id="start-sort-btn">GO!</button>
             </div>
         </div>
     </section>
@@ -122,4 +125,5 @@
 </body>
 <script src="js/script.js"></script> <!-- "script.js" must be included before "utilities.js" as the drag-sort action mechanism depends on variables declared in "script.js" -->
 <script src="js/utilities.js"></script>
+<script src="js/controls.js"></script>
 </html>

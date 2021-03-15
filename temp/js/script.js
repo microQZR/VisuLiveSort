@@ -1,6 +1,7 @@
 /* Inter script common variables declarations */
 let randNumArray; //The value of $randNumArray will be defined elsewhere
 let maxNumVal = 100; //The max numerical value of the numbers array
+let count, width, gap; //Declaring the (computed) main variables of interest for determining the main array's dimensions
 
 
 /* For determining the dimensions of the HTML elements to be inserted dynamically */
@@ -8,9 +9,7 @@ let maxNumVal = 100; //The max numerical value of the numbers array
 let minWidth = 10, minGap = 5, minCount = 10, maxWidth = 30;
 let arrSizeSliderVal = 0.15; //!IMPORTANT! - Effective main-array size controller
 
-//The following line declares the (computed) main variables of interest for determining the main array's dimensions
-let count, width, gap;
-
+//The following lines declare helper variables for determining the dimensions of the "main array", which are dependent on the VIEWPORT.
 let containerMaxWidth = document.querySelector('.main-sec-container').getBoundingClientRect().width; //div.main-sec-container is the usable area of section.main-sec for purposes of dispaying the "main array" and other content.
 let maxCount = containerMaxWidth / (minWidth + minGap);
 

@@ -15,7 +15,7 @@ function updateMainArrayContent(event, customArray) {
     arrElemWidth = width; //**IMPORTANT** $width is declared in "script.js" and $arrElemWidth is declared in "utilities.js"
     valsToSort = randNumArray //**IMPORTANT** $randNumArray is declared in "script.js" and $valsToSort is declared in "utilities.js"
     elems = [...document.querySelectorAll('.drag-sort-handle')];
-    elemsContainerDimen = document.querySelector('.main-array-box').getBoundingClientRect();
+    elemsContainerDimen = document.querySelector('.main-array').getBoundingClientRect();
     elems.forEach(elemStylePositioner); //Initially places the unsorted DOM elements within their DOM container
     elems.forEach(elem => { elem.onmousedown = dragSortInit; }); //Attaching the drag-sort action initialization event handler to each array element of $elems
     document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"

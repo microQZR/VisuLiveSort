@@ -84,8 +84,8 @@ let arrElemWidth = width; //**IMPORTANT** $width is declared in "script.js"
 let valsToSort = randNumArray //**IMPORTANT** $randNumArray is declared in "script.js"
 
 //Declaration and definition of non-tweakable variables
-let elems = [...document.querySelectorAll('.drag-sort-handle')]; //A bijection exists between $elems and $valsToSort, whereby indices of $valsToSort topologically maps to the relative position of each elements of $elems within the bounds of "div.main-array-box".
-let elemsContainerDimen = document.querySelector('.main-array-box').getBoundingClientRect();
+let elems = [...document.querySelectorAll('.drag-sort-handle')]; //A bijection exists between $elems and $valsToSort, whereby indices of $valsToSort topologically maps to the relative position of each elements of $elems within the bounds of "div.main-array".
+let elemsContainerDimen = document.querySelector('.main-array').getBoundingClientRect();
 let oldIndex, target2;
 
 //Utility function which adjusts the style of a given DOM element's !PARENT! based on a given position and updates that parent element's "data-currentindex" attribute

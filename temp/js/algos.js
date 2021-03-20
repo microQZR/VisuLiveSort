@@ -1,6 +1,6 @@
 let speed = 1;
 
-document.getElementById('start-sort-btn').addEventListener('click', bubbleSort);
+document.getElementById('start-sort-btn').addEventListener('click', mergeSortRecur);
 
 //Selection sort algorithm
 function selectionSort() {
@@ -109,8 +109,27 @@ function bubbleSort() {
 }
 
 //Merge sort algorithm
-function mergeSortRecur(arr, compareFct) {
+function mergeSortRecur() {
+    (function changeLayout() {
+        //The following lines reformat the layout of the div#main-array.main-array by creating a new one and replacing the old with the new.
+        let mainArray = document.querySelector('.main-array');
+        mainArray.style.height = "45%";
+        updateMainArrayContent(undefined, valsToSort);
+
+        //The following lines creates the DOM buffer array and inserts it into the DOM tree.
+        let bufferArray = mainArray.cloneNode(false);
+        bufferArray.id = "buffer-array";
+        document.getElementById("main-array").insertAdjacentElement('afterend', bufferArray);
+
+        bufferArray.parentElement.style.justifyContent = "space-between";
+        document.querySelectorAll(".slider-handle").forEach(value => value.style.display = "none");
+    })();
+    
+    let tick = 0;
     let buffer = [];
+    let elemsBuffer = [];
+    let dropDist = document.getElementById("buffer-array").getBoundingClientRect().bottom - document.getElementById("main-array").getBoundingClientRect().bottom;
+
     function mergeSort(start_i, end_i) { //$start_i and $end_i are inclusive smallest and largest indices of the sub-array to merge sort.
         if (start_i == end_i) return; //If $start_i == $end_i, then the sub-array to sort is the singleton base case, so just return.
 
@@ -122,18 +141,91 @@ function mergeSortRecur(arr, compareFct) {
     }
 
     function merge(p, q, r) {
-        let length_pq = q - p + 1;
-        for (let i = 0; i < length_pq; i++) buffer[i] = arr[p + i]; //Copy only the first sub-array to merge into the buffer
+        setTimeout(() => {
+            for (let i = p; i <= r; i++) elems[i].style.backgroundColor = "var(--main-yellow)";
+        } , 400 * tick++);
+
+        const length_pq = q - p + 1;
+        for (let i = 0; i < length_pq; i++) buffer[i] = valsToSort[p + i]; //Copy only the first sub-array to merge into the buffer
+        setTimeout(() => {
+            for (let i = 0; i < length_pq; i++) {
+                elems[p + i].parentElement.style.bottom = `-${dropDist}px`;
+                elemsBuffer[i] = elems[p + i];
+            }
+        }, 400 * tick++)
 
         let i = 0, j = q + 1, k = p;
+        // setTimeout((local_i, local_j) => {
+        //     elemsBuffer[local_i].style.backgroundColor = "var(--main-magenta)";
+        //     elems[local_j].style.backgroundColor = "var(--main-magenta)";
+        // }, 400 * tick++, i, j);
         while (i < length_pq && j < r + 1) {
-            if (compareFct(buffer[i], arr[j])) arr[k] = buffer[i++]; //If lowest element in buffer is smaller than the lowest element in the 2nd sub-array, copy the lowest element from the buffer into the next available slot of the merged array segment.
-            else arr[k] = arr[j++]; //If the above is not true, copy the lowest element from the 2nd sub-array directly into the next available slot of the merged array segment.
+            if (buffer[i] <= valsToSort[j]) {
+                setTimeout((local_k, local_i) => {
+                    elems[local_k] = elemsBuffer[local_i];
+                    elems[local_k].parentElement.style.bottom = "0px";
+                    elemStylePositioner(elems[local_k], local_k);
+
+                    elemsBuffer[local_i].style.backgroundColor = "var(--main-green)";
+                    // if (local_i !== length_pq - 1) elemsBuffer[local_i + 1].style.backgroundColor = "var(--main-magenta)";
+                }, 400 * tick++, k, i);
+                valsToSort[k] = buffer[i++];
+            } //If lowest element in buffer is smaller than the lowest element in the 2nd sub-array, copy the lowest element from the buffer into the next available slot of the merged array segment.
+            else {
+                setTimeout((local_k, local_j) => {
+                    elems[local_k] = elems[local_j];
+                    elemStylePositioner(elems[local_k], local_k);
+
+                    elems[local_j].style.backgroundColor = "var(--main-green)";
+                    // if (local_j !== r) elems[local_j + 1].style.backgroundColor = "var(--main-magenta)";
+                }, 400 * tick++, k, j);
+                valsToSort[k] = valsToSort[j++]; //If the above is not true, copy the lowest element from the 2nd sub-array directly into the next available slot of the merged array segment.
+            }
             k++;
         }
-        while (i < length_pq) arr[k++] = buffer[i++]; //Copies the remaining elements of the buffer if the elements of the 2nd sub-array is spent. If the elements in the buffer would be spent, no need to copy over the remaining elements of the 2nd sub-array as they would be already in right place.
+        while (i < length_pq) {
+            setTimeout((local_k, local_i) => {
+                elems[local_k] = elemsBuffer[local_i];
+                elems[local_k].parentElement.style.bottom = "0px";
+                elemStylePositioner(elems[local_k], local_k);
+
+                elemsBuffer[local_i].style.backgroundColor = "var(--main-green)";
+                // if (local_i !== length_pq - 1) elemsBuffer[local_i + 1].style.backgroundColor = "var(--main-magenta)";
+            }, 400 * tick++, k, i);
+            valsToSort[k++] = buffer[i++]; //Copies the remaining elements of the buffer if the elements of the 2nd sub-array is spent. If the elements in the buffer would be spent, no need to copy over the remaining elements of the 2nd sub-array as they would be already in right place.
+        }
+
+        while (j < r + 1) setTimeout(local_j => elems[local_j].style.backgroundColor = "var(--main-green)", 400 * tick++, j++); //For visual effects only.
+
+        setTimeout(() => {
+            for (let i = p; i <= r; i++) elems[i].style.backgroundColor = "var(--main-blue)";
+        } , 400 * tick++);
     }
 
-    mergeSort(0, arr.length - 1);
-    return arr;
+    mergeSort(0, valsToSort.length - 1);
+    console.log(valsToSort); //This shall be removed for production.
+
+    let tickTime = 400 * tick;
+    for (let i = 0; i <= elems.length; i++) {
+        setTimeout(() => {
+            if (i !== elems.length) elems[i].style.backgroundColor = "var(--main-magenta)";
+            if (i !== 0) elems[i - 1].style.backgroundColor = "var(--main-green)";
+        }, tickTime);
+        tickTime += 50;
+    }
+
+    function restoreLayout() {
+        document.getElementById("buffer-array").parentElement.removeChild(document.getElementById("buffer-array"));
+        
+        let mainArray = document.querySelector('.main-array');
+        let newMainArray = mainArray.cloneNode(false);
+        newMainArray.style.height = "90%";
+        mainArray.parentElement.style.justifyContent = "center";
+        mainArray.parentElement.replaceChild(newMainArray, mainArray);
+        updateMainArrayContent(undefined, valsToSort);
+
+        elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
+    };
+
+    setTimeout(restoreLayout, tickTime);
 }

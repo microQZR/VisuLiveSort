@@ -64,15 +64,27 @@ header .flex {
     height: 80%;
     width: 70%;
     outline: 1px solid blue;
+    flex-direction: column;
     /* background-color: #00ffbb41; */
     /* margin: auto; //Not needed due to "display: flex" on parent*/
 }
 
-#main-array {
-    /* background-color: #ff009594; */
+.main-array {
     outline: 2px solid red;
-    /* height: 80%;
-    width: 80%; */
+    position: relative;
+    height: 90%;
+    width: 100%;
+}
+
+.array-item {
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    transition: 0.5s ease-out;
+    color: white;
+    text-align: center;
+    bottom: 0; /* This serves as an anchor for the transition during merge sort */
+    /* background-color: var(--main-green); */
 }
 
 .settings-box {
@@ -155,6 +167,31 @@ footer {
     height: 5vh;
     /* border: 1px solid red; */
 }
+
+/* Slider Components */
+.slider-bar {
+    background-color: var(--main-blue);
+    position: absolute;
+    bottom: 0px;
+    height: 100%;
+}
+
+.slider-circ {
+    background-color: var(--main-purple);
+    border-radius: 50%;
+    /* transform: rotate(45deg); */
+    position: absolute;
+    color: white;
+}
+
+.slider-circ:hover {
+    cursor: pointer;
+}
+
+
+
+
+
 
 /* Utilities */
 .container {

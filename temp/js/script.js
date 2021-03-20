@@ -26,7 +26,7 @@ function calculateWidthGapCount(customCount) {
     
     gap = containerMaxWidth / count * (minGap / (minWidth + minGap))
     if (gap > maxWidth / 2) gap = maxWidth / 2;
-    count = Math.floor(count); //Adjustment code to make sure main array elements don't protrude div#main-array.main-array-box and making sure that $count is an integer value.
+    count = Math.floor(count); //Adjustment code to make sure main array elements don't protrude div.main-array and making sure that $count is an integer value.
 };
 
 /* For generating and inserting the HTML main array */
@@ -35,21 +35,21 @@ function generateHTMLMainArray(customArray) {
     else randNumArray = newRandNumArray(count, maxNumVal); //Defines the random number array
 
     //For generating the main array of poper dimensions
-    let maxHeight = document.querySelector('.main-array-box').getBoundingClientRect().height; //The max height of the "main-array"'s component child elements
-    let mainArrayBox = document.querySelector('.main-array-box'); //Selects the old div#main-array.main-array-box to be replaced
+    let maxHeight = document.querySelector('.main-array').getBoundingClientRect().height; //The max height of the "main-array"'s component child elements
+    let mainArrayBox = document.querySelector('.main-array'); //Selects the old div.main-array to be replaced
     let newArrayBox = mainArrayBox.cloneNode(false);
-    newArrayBox.style.width = count * (width + gap) - gap + 'px'; //Set the CSS width of the new div#main-array.main-array-box
+    newArrayBox.style.width = count * (width + gap) - gap + 'px'; //Set the CSS width of the new div.main-array
     newArrayBox.innerHTML = `<div class="array-item" data-currentindex="0" style="width: ${width}px">
     <div class="slider-bar drag-sort-handle" style="width: ${width}px; height: ${randNumArray[0] / maxNumVal * maxHeight}px;"></div>
     <div class="slider-circ slider-handle flex" style="width: ${width + gap/2}px; height: ${width + gap/2}px; top: ${(-(width + gap/2) / 2) + ((1 - randNumArray[0] / maxNumVal) * maxHeight)}px; left: -${gap / 4}px">${randNumArray[0]}</div>
-    </div>`; //This statement and the next populates the new div#main-array.main-array-box with the right number of child elements
+    </div>`; //This statement and the next populates the new div.main-array with the right number of child elements
     for (let i = 1; i < count; i++) {
         newArrayBox.insertAdjacentHTML('beforeend', `<div class="array-item" data-currentindex="${i}" style="width: ${width}px">
         <div class="slider-bar drag-sort-handle" style="width: ${width}px; height: ${randNumArray[i] / maxNumVal * maxHeight}px;"></div>
         <div class="slider-circ slider-handle flex" style="width: ${width + gap/2}px; height: ${width + gap/2}px; top: ${(-(width + gap/2) / 2) + ((1 - randNumArray[i] / maxNumVal) * maxHeight)}px; left: -${gap / 4}px">${randNumArray[i]}</div>
-        </div>`); //The second argument is the HTML content of main array elements to be inserted into div#main-array.main-array-box
+        </div>`); //The second argument is the HTML content of main array elements to be inserted into div.main-array
     }
-    mainArrayBox.parentNode.replaceChild(newArrayBox, mainArrayBox); //Replaces the old div#main-array.main-array-box with the new one in the DOM tree
+    mainArrayBox.parentNode.replaceChild(newArrayBox, mainArrayBox); //Replaces the old div.main-array with the new one in the DOM tree
 };
 
 /* For generating a random number array of the proper size */

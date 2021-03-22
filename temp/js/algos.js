@@ -1,6 +1,6 @@
 let speed = 1;
 
-document.getElementById('start-sort-btn').addEventListener('click', mergeSortRecur);
+document.getElementById('start-sort-btn').addEventListener('click', quicksort);
 
 //Selection sort algorithm
 function selectionSort() {
@@ -229,3 +229,76 @@ function mergeSortRecur() {
 
     setTimeout(restoreLayout, tickTime);
 }
+
+//Quicksort algorithm
+function quicksort() {
+    let tick = 0;
+
+    //The recursive sort function
+    function sort(lo, hi) {
+        if (lo >= hi) {
+            if (lo == hi) setTimeout(() => elems[hi].style.backgroundColor = "var(--main-green)", 300 * tick++);
+            return; //Return immediately if this call corresponds to the base case scenarios of a single-element partition or a zero-element partition.
+        }
+
+        let center = partition(lo, hi); //Perform paritioning
+        if (center - 1 - lo <= hi - (center + 1)) { //Make the recursive call first on the smaller of the two partitions.
+            sort(lo, center -1);
+            sort(center + 1, hi);
+        } else {
+            sort(center + 1, hi);
+            sort(lo, center -1);
+        }
+    };
+
+    //The partitioning function. This implementation uses Lomuto's partition scheme.
+    function partition(lo, hi) {
+        setTimeout(() => {
+            for (let i = lo; i <= hi; i++) elems[i].style.backgroundColor = "var(--main-yellow)";
+        }, 300 * tick++);
+
+        let pivotVal = valsToSort[hi];
+        let swapIndex = lo; //A pointer indicating the next position of the valsToSortay to swap into.
+
+        setTimeout(() => {
+            elems[hi].style.backgroundColor = "var(--main-magenta)";
+            // e_swapIndex.style.backgroundColor = "var(--main-magenta)";
+        }, 300 * tick++, hi, elems[swapIndex]);
+
+        for (let i = lo; i < hi; i++) {
+            setTimeout((local_i, local_swapIndex) => {
+                elems[local_i].style.backgroundColor = "var(--main-magenta)";
+                if (local_i !== lo) elems[local_i - 1].style.backgroundColor = "var(--main-yellow)";
+                elems[local_swapIndex].style.backgroundColor = "var(--main-magenta)";
+            }, 300 * tick++, i, swapIndex);
+
+            if (valsToSort[i] < pivotVal) {
+                setTimeout((local_i, local_swapIndex) => {
+                    elemStylePositioner(elems[local_i], local_swapIndex);
+                    elemStylePositioner(elems[local_swapIndex], local_i);
+                    [elems[local_i], elems[local_swapIndex]] = [elems[local_swapIndex], elems[local_i]];
+                }, 300 * tick++, i, swapIndex);
+                setTimeout(local_swapIndex => elems[local_swapIndex].style.backgroundColor = "var(--main-yellow)", 300 * tick++, swapIndex);
+
+                [valsToSort[i], valsToSort[swapIndex]] = [valsToSort[swapIndex], valsToSort[i]];
+                swapIndex++;
+            }
+        }
+        [valsToSort[hi], valsToSort[swapIndex]] = [valsToSort[swapIndex], valsToSort[hi]]; //Swaps the pivot value into the center of the current partition at the end of the current iteration.
+        
+        setTimeout(() => {
+            elemStylePositioner(elems[hi], swapIndex);
+            elemStylePositioner(elems[swapIndex], hi);
+            [elems[hi], elems[swapIndex]] = [elems[swapIndex], elems[hi]];
+        }, 300 * tick++)
+
+        setTimeout(() => {
+            for (let i = lo; i <= hi; i++) elems[i].style.backgroundColor = "var(--main-blue)";
+            elems[swapIndex].style.backgroundColor = "var(--main-green)";
+        }, 300 * tick++);
+        return swapIndex;
+    };
+
+    sort(0, valsToSort.length - 1);
+    console.log(valsToSort); //This shall be removed for production.
+};

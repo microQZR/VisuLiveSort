@@ -1,6 +1,6 @@
 let speed = 1;
 
-document.getElementById('start-sort-btn').addEventListener('click', quicksort);
+document.getElementById('start-sort-btn').addEventListener('click', countingSort);
 
 //Selection sort algorithm
 function selectionSort() {
@@ -302,3 +302,112 @@ function quicksort() {
     sort(0, valsToSort.length - 1);
     console.log(valsToSort); //This shall be removed for production.
 };
+
+//Counting sort algorithm
+function countingSort() {
+    //For changing the layout at animation start
+    (function changeLayout() {
+        //The following lines reformat the layout of the div#main-array.main-array by creating a new one and replacing the old with the new.
+        let mainArray = document.querySelector('.main-array');
+        mainArray.style.height = "60%";
+        updateMainArrayContent(undefined, valsToSort);
+
+        let keyCountSection = document.createElement('div');
+        keyCountSection.style.height = "35%";
+        keyCountSection.className = "counting-sort-container flex";
+        keyCountSection.insertAdjacentHTML("beforeend", `<div class="counting-sort-subunit flex title-subunit">
+        <div class="counting-sort-title">Key:</div>
+        <div class="counting-sort-title">Number of<br>occurrences:</div>
+        </div>`);
+        for (let i = 0; i <= 10; i++) { keyCountSection.insertAdjacentHTML("beforeend", `<div class="counting-sort-subunit flex">
+        <div class="counting-sort-key flex" style="width: ${width + gap/2}px; height: ${width + gap/2}px;">${i}</div>
+        <div class="key-occurrence flex" style="width: ${width + gap/2}px; height: ${width + gap/2}px;">0</div>
+        </div>`); }
+        document.querySelector('.main-sec-container').appendChild(keyCountSection);
+
+        keyCountSection.parentElement.style.justifyContent = "space-between";
+    })();
+
+    //Animation main section start
+    let tick = 0;
+    let keysHTML = document.querySelectorAll('.counting-sort-key');
+    let keyOccurrencesHTML = document.querySelectorAll('.key-occurrence');
+    let count = [0,0,0,0,0,0,0,0,0,0,0], output = [], tempElems = [[],[],[],[],[],[],[],[],[],[],[]];
+    valsToSort.forEach((value, index) => {
+        count[value] += 1;
+        tempElems[value].push(elems[index])
+
+        setTimeout((e_index, local_value, local_count_value) => {
+            e_index.style.backgroundColor = "var(--main-magenta)";
+            keysHTML[local_value].style.backgroundColor = "var(--main-magenta)";
+            keysHTML[local_value].style.color = "#fff";
+            keyOccurrencesHTML[local_value].textContent = local_count_value;
+            keyOccurrencesHTML[local_value].style.textShadow = "var(--main-magenta) 0 0 10px";
+        }, 300 * tick++, elems[index], value, count[value]);
+        
+        setTimeout((e_index, local_value) => {
+            e_index.parentElement.style.opacity = "0%"; //Set this to elems[index].parentElement.style.opacity
+            keysHTML[local_value].style.backgroundColor = "var(--main-yellow)";
+            keysHTML[local_value].style.color = "var(--main-purple)";
+            keyOccurrencesHTML[local_value].style.textShadow = "none";
+        }, 300 * tick++, elems[index], value);
+    })
+
+    count.forEach((value, index) => {
+        if (value === 0) return;
+        for (let i = 1; i <= value; i++) output.push(index);
+    });
+    valsToSort = output;
+
+    elems = [];
+    tempElems.forEach(value => {
+        let j = value.length;
+        for (let i = 0; i < j; i++) elems.push(value.pop());
+    });
+    
+    tick += 1 //Setting extra delay on setTimeout timer to avoid visual artifact 
+    setTimeout(() => elems.forEach(elemStylePositioner), 300 * tick++)
+    tick += 1 //Setting extra delay on setTimeout timer to avoid visual artifact 
+    elems.forEach((value, index) => {
+        setTimeout(() => {
+            value.parentElement.style.opacity = "100%"
+            if (index !== 0) elems[index - 1].style.backgroundColor = "var(--main-green)";
+            
+            // keysHTML[valsToSort[index]].style.backgroundColor = "var(--main-magenta)";
+            // keysHTML[valsToSort[index]].style.color = "#fff";
+            keyOccurrencesHTML[valsToSort[index]].textContent = parseInt(keyOccurrencesHTML[valsToSort[index]].textContent) - 1;
+            keyOccurrencesHTML[valsToSort[index]].style.textShadow = "var(--main-magenta) 0 0 5px";
+        }, 300 * tick);
+        tick += 0.5
+        setTimeout(() => {
+            // keysHTML[valsToSort[index]].style.backgroundColor = "var(--main-yellow)";
+            // keysHTML[valsToSort[index]].style.color = "var(--main-purple)";
+            keyOccurrencesHTML[valsToSort[index]].style.textShadow = "none";
+        }, 300 * tick);
+        tick += 0.5
+    });
+    setTimeout(() => elems[elems.length - 1].style.backgroundColor = "var(--main-green)", 300 * tick++);
+    //Animation main section end
+
+    //For restoring the layout at animation end
+    function restoreLayout() {
+        document.querySelector('.counting-sort-container').parentElement.removeChild(document.querySelector('.counting-sort-container'));
+        
+        let mainArray = document.querySelector('.main-array');
+        let newMainArray = mainArray.cloneNode(false);
+        newMainArray.style.height = "90%";
+        mainArray.parentElement.style.justifyContent = "center";
+        mainArray.parentElement.replaceChild(newMainArray, mainArray);
+        updateMainArrayContent(undefined, valsToSort);
+
+        elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
+    };
+
+    setTimeout(restoreLayout, 300 * tick);
+}
+
+(function setupCountingSortArray() {
+    let countingSortArray = newRandNumArray(count, 10);
+    maxNumVal = 10;
+    updateMainArrayContent(undefined, countingSortArray);
+})()

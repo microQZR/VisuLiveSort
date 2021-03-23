@@ -1,0 +1,99 @@
+
+/* Utilities */
+.container {
+    width: 80%;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+}
+
+.btn {
+    background-color: var(--main-blue);
+    color: white;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    /* border: #318bff 2px solid; */
+    background-color: #006fff;
+    transform: scale(0.96);
+    /* border: var(--main-green) 2px solid; */
+}
+
+.btn:active {
+    box-shadow: inset 0 0 5px 0px #fff;
+    border: none
+}
+
+/* Margin */
+.my-1 {
+    margin: 1rem 0;
+}
+
+.my-2 {
+    margin: 1.5rem 0;
+}
+
+.my-3 {
+    margin: 2rem 0;
+}
+
+.m-12px {
+    margin: 12px;
+}
+
+.m-1 {
+    margin: 1rem;
+}
+
+.m-2 {
+    margin: 1.5rem;
+}
+
+.m-3 {
+    margin: 2rem;
+}
+
+/* Padding */
+.py-1 {
+    padding: 1rem 0;
+}
+
+.py-2 {
+    padding: 1.5rem 0;
+}
+
+.py-3 {
+    padding: 2rem 0;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.p-2 {
+    padding: 1.5rem;
+}
+
+.p-3 {
+    padding: 2rem;
+}

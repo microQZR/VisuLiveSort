@@ -1,7 +1,5 @@
 let speed = 1;
 
-document.getElementById('start-sort-btn').addEventListener('click', countingSort);
-
 //Selection sort algorithm
 function selectionSort() {
     let tick = 0;
@@ -406,8 +404,3 @@ function countingSort() {
     setTimeout(restoreLayout, 300 * tick);
 }
 
-(function setupCountingSortArray() {
-    let countingSortArray = newRandNumArray(count, 10);
-    maxNumVal = 10;
-    updateMainArrayContent(undefined, countingSortArray);
-})()

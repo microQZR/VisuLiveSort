@@ -55,7 +55,7 @@ function generateHTMLMainArray(customArray) {
 /* For generating a random number array of the proper size */
 function newRandNumArray(size, maxVal) {
     const result = [];
-    for (let i = 0; i < size; i++) result.push(Math.round(Math.random() * maxVal)); //The constant factor multiplied to "Math.random()" determines the range of obtained values.
+    for (let i = 0; i < size; i++) result.push(Math.floor(Math.random() * (maxVal + 1))); //The constant factor multiplied to "Math.random()" determines the range of obtained values.
     return result;
 };
 

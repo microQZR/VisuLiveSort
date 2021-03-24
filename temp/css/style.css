@@ -30,13 +30,15 @@ header {
     height: 12vh;
 }
 
-header .flex {
+header .flex.container {
     margin: auto;
     height: 65%;
     color: white;
-    background-color: #36008c;
-    padding: 10px 50px;
+    background: url(motif.svg) #36008c no-repeat -5% 45% / 20%;
+    padding-left: 40px;
+    padding-right: 40px;
     border-radius: 10px;
+    justify-content: space-between;
 }
 
 header .flex li {
@@ -50,8 +52,33 @@ header .flex li:first-child {
     border-left: none;
 }
 
-header .flex {
-    justify-content: space-between;
+.nav-item {
+    transition: 0.5s;
+    font-weight: 400;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+.nav-item.active {
+	background-color: var(--main-purple);
+	padding: 5px 0 5px 10px;
+	border-radius: 100px;
+	font-weight: 400;
+	/* font-weight: 300; */
+}
+
+.nav-collapsable {
+    display: none;
+}
+
+.nav-collapsable.active {
+	background-color: var(--main-yellow);
+	padding: 5px 10px;
+	border-radius: 100px;
+	color: #000;
+    display: initial;
 }
 
 /* Main Section */

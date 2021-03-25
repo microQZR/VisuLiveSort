@@ -3,6 +3,10 @@ let speed = 1;
 //Selection sort algorithm
 function selectionSort() {
     let tick = 0;
+    initialTimerID = setTimeout(() => {});
+    disableSlideDrag();
+    resetArrayItemsColor();
+
     for (let i = 0; i < valsToSort.length; i++) {
         let swapIndex = i;
         setTimeout((e_i) => e_i.style.backgroundColor = "var(--main-magenta)", 300 * tick++, elems[i]);
@@ -27,12 +31,18 @@ function selectionSort() {
         }
         setTimeout(e_i => e_i.style.backgroundColor = "var(--main-green)", 300 * tick++, elems[i]);
     }
+
+    setTimeout(enableSlideDrag, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
 //Insertion sort algorithm
 function insertionSort() {
     let tick = 0;
+    initialTimerID = setTimeout(() => {});
+    disableSlideDrag();
+    resetArrayItemsColor();
+
     for (let i = 1; i < valsToSort.length; i++) {
         let j, testVal = valsToSort[i], focusedElement = elems[i];
         setTimeout(() => focusedElement.style.backgroundColor = "var(--main-magenta)", 300 * tick++);
@@ -59,12 +69,18 @@ function insertionSort() {
         elems[j + 1] = focusedElement;
         valsToSort[j + 1] = testVal;
     }
+
+    setTimeout(enableSlideDrag, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
 //Bubble sort algorithm
 function bubbleSort() {
     let tick = 0;
+    initialTimerID = setTimeout(() => {});
+    disableSlideDrag();
+    resetArrayItemsColor();
+
     for (let i = 0; i < valsToSort.length - 1; i++) {
         let swap = false;
         for (let j = 0; j < valsToSort.length - 1 - i; j++) {
@@ -100,9 +116,12 @@ function bubbleSort() {
                 setTimeout(e_j => e_j.style.backgroundColor = "var(--main-green)", nextTickTime, elems[j]);
                 nextTickTime += 15; 
             }
+            tick = Math.ceil(nextTickTime / 300);
             break;
         }
     }
+
+    setTimeout(enableSlideDrag, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
@@ -124,6 +143,9 @@ function mergeSortRecur() {
     })();
     
     let tick = 0;
+    initialTimerID = setTimeout(() => {});
+    disableSlideDrag();
+
     let buffer = [];
     let elemsBuffer = [];
     let dropDist = document.getElementById("buffer-array").getBoundingClientRect().bottom - document.getElementById("main-array").getBoundingClientRect().bottom;
@@ -226,11 +248,14 @@ function mergeSortRecur() {
     };
 
     setTimeout(restoreLayout, tickTime);
+    setTimeout(enableSlideDrag, tickTime + 10);
 }
 
 //Quicksort algorithm
 function quicksort() {
     let tick = 0;
+    initialTimerID = setTimeout(() => {});
+    disableSlideDrag();
 
     //The recursive sort function
     function sort(lo, hi) {
@@ -298,6 +323,8 @@ function quicksort() {
     };
 
     sort(0, valsToSort.length - 1);
+
+    setTimeout(enableSlideDrag, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 };
 
@@ -328,6 +355,9 @@ function countingSort() {
 
     //Animation main section start
     let tick = 0;
+    initialTimerID = setTimeout(() => {});
+    disableSlideDrag();
+
     let keysHTML = document.querySelectorAll('.counting-sort-key');
     let keyOccurrencesHTML = document.querySelectorAll('.key-occurrence');
     let count = [0,0,0,0,0,0,0,0,0,0,0], output = [], tempElems = [[],[],[],[],[],[],[],[],[],[],[]];
@@ -401,6 +431,7 @@ function countingSort() {
         elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
     };
 
-    setTimeout(restoreLayout, 300 * tick);
+    setTimeout(restoreLayout, 300 * tick++);
+    setTimeout(enableSlideDrag, 300 * tick++);
 }
 

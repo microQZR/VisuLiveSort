@@ -1,22 +1,22 @@
-/*** For swap animation/transition ***/
-let trial1 = (e) => {
-    document.getElementById('test6').classList.add('animate');
-    console.log('OK');
+/*** General Utility Functions ***/
+function disableSlideDrag() {
+    document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = null); //Detaching the drag action initializer to all DOM elements with class="slider-handle"
+    elems.forEach(elem => { elem.onmousedown = null; }); //Detaching the drag-sort action initialization event handler from each array element of $elems
 };
-let trial2 = (e) => {
-    document.getElementById('test6').style.animation = "trial2 1s forwards";
-    console.log('OK');
+
+function enableSlideDrag() {
+    document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
+    elems.forEach(elem => { elem.onmousedown = dragSortInit; }); //Attaching the drag-sort action initialization event handler to each array element of $elems
 };
-let clearTrial2 = e => {
-    document.getElementById('test6').style.animation = 'none';
-};
-let trial3 = e => {
-    document.getElementById('test6').style.right = '50px';
-    document.getElementById('test6').style.backgroundColor = 'red';
-};
-let clearTrial3 = e => {
-    document.getElementById('test6').style.right = '0px';
-    document.getElementById('test6').style.backgroundColor = 'var(--main-purple)';
+
+function resetArrayItemsColor() {
+    elems.forEach(elem => elem.style.backgroundColor = "var(--main-blue)");
+}
+
+let initialTimerID;
+function cancelPendingJobs() {
+    for (let i = initialTimerID; i <= setTimeout(() => {}); i++) clearTimeout(i);
+    enableSlideDrag();
 };
 
 
@@ -124,7 +124,7 @@ function h_dragFini(e) {
 };
 
 //Attaching initialization event handlers
-document.querySelectorAll('.h-slider-handle').forEach((element) => element.onmousedown = h_dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
+document.querySelectorAll('.h-slider-handle').forEach((element) => element.onmousedown = h_dragInit); //Attaching the drag action initializer to all DOM elements with class="h-slider-handle"
 
 
 /*** For drag-sort drag action ***/

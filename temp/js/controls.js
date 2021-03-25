@@ -30,6 +30,7 @@ function reshuffle() {
         temp = elems[j]; elems[j] = elems[i]; elems[i] = temp;
     }
     elems.forEach(elemStylePositioner); //Reposition each main array subelement at the right position
+    resetArrayItemsColor();
 };
 
 /* "Manual input array" form handler */

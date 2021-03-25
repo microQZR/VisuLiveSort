@@ -21,9 +21,7 @@ let clearTrial3 = e => {
 
 
 
-/*** For slider drag action ***
-*!Functional, but noticeable CPU usage under continuous drag @ ~5% CPU load. May be enhanced.
-*/
+/*** For Slider Drag Action ***/
 
 //All variables declared below are defined/redefined by dragInit() and would hold values to be used by the slider drag action mechanism. (i.e. dragInit() and dragOn() )
 let target, targetHalfHeight, sliderBar;
@@ -74,6 +72,59 @@ function dragFini(e) {
 //Attaching initialization event handlers
 document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
 
+
+/*** For Horizontal Sliders of Settings Box ***/
+
+let trackWidth, leftmostPos, rightmostPos
+
+//Horizontal slider drag action initialization event handler
+function h_dragInit(e) {
+    e.preventDefault();
+
+    //Redefining all values used and manipulated by the slider drag action mechanism based on the selected slider handle
+    target = this; //This is the currently selected slider handle
+    targetHalfHeight = target.getBoundingClientRect().height / 2;
+    targetTrack = this.parentElement; //This is the slider track on which the handle slides
+    trackInfo = targetTrack.getBoundingClientRect(); //This value holds the dimensions of the slider track
+    trackWidth = trackInfo.width;
+    leftmostPos = trackInfo.left + window.scrollX; //$trackInfo.left is viewport coordinate; adding $window.scrollX converts it to document-page coordinate
+    rightmostPos = trackInfo.right + window.scrollX; //$trackInfo.right is viewport coordinate; adding $window.scrollX converts it to document-page coordinate
+    // sliderBar = this.previousElementSibling; //This is the "slider bar" component controlled by the current slider handle
+
+
+    document.onmouseup = h_dragFini;
+    document.onmousemove = h_dragOn;
+};
+
+//Drag action core event handler
+function h_dragOn(e) {
+    e.preventDefault();
+
+    //Calculates $sliderVal value, which ranges from 0 to 1 based on $e.pageX
+    if (e.pageX < leftmostPos) sliderVal = 0;
+    else if (e.pageX <= rightmostPos) sliderVal = (e.pageX - leftmostPos) / trackWidth;
+    else sliderVal = 1;
+
+    target.style.left = trackWidth * sliderVal - targetHalfHeight + 'px'; //Updates the position of the slider handle using CSS
+    // target.textContent = Math.round(sliderVal * maxNumVal); //Updates the number displayed within the slider handle through the HTML content
+    // sliderBar.style.height = trackHeight * sliderVal + 'px'; //Updates the position of the "slider-bar"'s height using CSS
+};
+
+//Drag action termination event handler
+function h_dragFini(e) {
+    document.onmouseup = null;
+    document.onmousemove = null;
+
+    if (target.id === "size-handle") {
+        console.log("size:", sliderVal)
+    } else {
+        console.log("speed:", sliderVal)
+    }
+    // randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = sliderVal * maxNumVal;
+};
+
+//Attaching initialization event handlers
+document.querySelectorAll('.h-slider-handle').forEach((element) => element.onmousedown = h_dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
 
 
 /*** For drag-sort drag action ***/

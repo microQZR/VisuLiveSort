@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/test.css">
 </head>
 <body>
+    <!-- Header & Navbar -->
     <header class="flex">
         <div class="flex container">
             <h1>VisuLiveSort</h1>
@@ -29,14 +30,34 @@
     <!-- Main Section -->
     <section class="main-sec flex">
         <div class="main-sec-container container flex">
-            <!-- <div class="settings-box">
-                <link rel="stylesheet" href="css/test-try2.css">
-                <div class="slider-track-try2">
-                    <div class="slider-bar-try2"></div>
-                    <div class="slider-circ-try2 slider-target flex">88</div>
-                </div>                
+
+            <!-- Settings Box -->
+            <div id="settings-box" class="flex">
                 <div id="settings-toggle"></div>
-            </div> -->
+                <div id="settings-container" class="container grid">
+                    <div id="settings-size" class="flex" style="grid-column: 1 / span 4;">
+                        <div>Size:</div>
+                        <div class="h-slider-track"><div id="size-handle" class="h-slider-handle"></div></div>
+                    </div>
+                    <div id="settings-speed" class="flex" style="grid-column: 1 / span 4;">
+                        <div>Speed:</div>
+                        <div class="h-slider-track"><div id="speed-handle" class="h-slider-handle"></div></div>
+                    </div>
+                    <div id="settings-subtitle" style="grid-column: 1 / span 4;">Algorithm analysis</div>
+                    <div id="settings-complexity" class="flex" style="grid-column: 1 / span 2; grid-row: 4 / span 2;">
+                        <div>Time complexity:</div>
+                        <div>Best: O(n²)</div>
+                        <div>AVG: O(n²)</div>
+                        <div>Worst: O(n²)</div>
+                    </div>
+                    <div id="settings-inplace" style="grid-column: 3 / span 1; grid-row: 4 / span 1;" class="flex">In-place<br>sort:</div>
+                    <div id="inplace-status" style="grid-column: 4 / span 1; grid-row: 4 / span 1;"></div>
+                    <div id="settings-stable" style="grid-column: 3 / span 1; grid-row: 5 / span 1;" class="flex">Stable<br>sort:</div>
+                    <div id="stable-status" style="grid-column:  4 / span 1; grid-row: 5 / span 1;"></div>
+                </div>
+            </div>
+
+            <!-- Main Array Insertion Point -->
             <div id="main-array" class="main-array"></div>
         </div>
         

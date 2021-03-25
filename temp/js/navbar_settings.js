@@ -69,4 +69,35 @@ document.getElementById('counting-sort').addEventListener('click', () => {
 })
 
 
+/** Settings Section **/
+document.getElementById('settings-toggle').onclick = settingsToggle;
 
+function settingsToggle(){
+    let settingsBox = document.getElementById('settings-box');
+    let settingsContainer = document.getElementById('settings-container');
+    
+    if (settingsBox.classList.contains('open')) {
+        settingsBox.classList.remove('open');
+
+        settingsContainer.style.display = "none";
+        settingsBox.style.height = 0;
+        settingsBox.style.width = 0;
+        settingsBox.style.minHeight = 0;
+        settingsBox.style.minWidth = 0;
+
+        this.style.background = "url(./css/cog.svg) var(--main-blue) no-repeat -16px";
+    } else {
+        settingsBox.classList.add('open');
+
+        settingsBox.style.height = "100%";
+        settingsBox.style.width = "35%";
+        settingsBox.style.minHeight = "300px";
+        settingsBox.style.minWidth = "300px";
+        
+        setTimeout(() => {
+            settingsContainer.style.display = "grid";
+        }, 200)
+
+        this.style.background = "url(./css/whitecross.svg) var(--main-blue) no-repeat 6.5px";
+    }
+}

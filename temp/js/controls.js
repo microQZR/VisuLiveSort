@@ -9,6 +9,7 @@ document.getElementById('manual-array').addEventListener('click', clearFormError
 
 /* "nra-btn" event handler */// --> Updates all parameters and variables required by "utilities.js", reexecutes all relevant statements (excludes variable declarations) from "utilities.js", sets $maxNumVal if directly invoked as event handler callback and executes "generateHTMLMainArray()".
 function updateMainArrayContent(event, customArray) {
+    cancelPendingJobs();
     if (event) maxNumVal = 100; //Sets $maxNumVal if "updateMainArrayContent()" is directly invoked as event handler callback
     generateHTMLMainArray(customArray); //The argument $customArray would be undefined if "updateMainArrayContent()" is directly invoked as event handler callback, otherwise an array object shall be provided as its value.
     arrElemGap = gap; //**IMPORTANT** $gap is declared in "script.js" and $arrElemGap is declared in "utilities.js"

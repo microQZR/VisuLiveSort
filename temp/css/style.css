@@ -42,19 +42,19 @@ header .flex.container {
 }
 
 header .flex li {
-    margin-left: 20px;
-    padding-left: 20px;
     font-weight: 500;
-    border-left: white 1px solid;
+    margin: 20px;
 }
 
-header .flex li:first-child {
-    border-left: none;
+span.separator {
+    border-left: 1px solid #fff;
+    height: 20px;
 }
 
 .nav-item {
     transition: 0.5s;
     font-weight: 400;
+    display: inline-block;
 }
 
 .nav-item:hover {

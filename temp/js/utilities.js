@@ -15,8 +15,9 @@ function resetArrayItemsColor() {
 
 let initialTimerID;
 function cancelPendingJobs() {
-    for (let i = initialTimerID; i <= setTimeout(() => {}); i++) clearTimeout(i);
-    enableSlideDrag();
+    let currentTimerID = setTimeout(() => {});
+    for (let i = initialTimerID; i <= currentTimerID; i++) clearTimeout(i);
+    // enableSlideDrag();
 };
 
 

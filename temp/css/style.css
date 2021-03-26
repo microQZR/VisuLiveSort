@@ -51,17 +51,21 @@ span.separator {
     height: 20px;
 }
 
-.nav-item {
-    transition: 0.5s;
-    font-weight: 400;
-    display: inline-block;
+header nav, header ul, header li {
+    height: 100%;
 }
 
 .nav-item:hover {
     cursor: pointer;
 }
 
-.nav-item.active {
+.nav-text {
+    transition: 0.5s;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.active > .nav-text {
 	background-color: var(--main-purple);
 	padding: 5px 0 5px 10px;
 	border-radius: 100px;

@@ -48,7 +48,10 @@ function reshuffle() {
     if (animationOngoing) {
         if (activeSortHandle.id == 'merge-sort' || activeSortHandle.id == 'quick-sort' || activeSortHandle.id == 'counting-sort') {
             updateMainArrayContent(undefined, valsToSort);
-        } else cancelPendingJobs();
+        } else {
+            cancelPendingJobs();
+            animationOngoing = false;
+        }
     }
     
     for (let i = randNumArray.length - 1; i > 0; i--) {

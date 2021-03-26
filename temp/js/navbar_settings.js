@@ -4,6 +4,9 @@ document.getElementById('start-sort-btn').onclick = selectionSort;
 
 /** Navbar Section **/
 document.getElementById('selection-sort').addEventListener('click', () => {
+    if (activeSortHandle.id == 'selection-sort') return;
+    if (animationOngoing) reshuffle();
+
     document.getElementById('start-sort-btn').onclick = selectionSort;
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
@@ -14,6 +17,9 @@ document.getElementById('selection-sort').addEventListener('click', () => {
 });
 
 document.getElementById('insertion-sort').addEventListener('click', () => {
+    if (activeSortHandle.id == 'insertion-sort') return;
+    if (animationOngoing) reshuffle();
+
     document.getElementById('start-sort-btn').onclick = insertionSort;
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
@@ -24,6 +30,9 @@ document.getElementById('insertion-sort').addEventListener('click', () => {
 })
 
 document.getElementById('bubble-sort').addEventListener('click', () => {
+    if (activeSortHandle.id == 'bubble-sort') return;
+    if (animationOngoing) reshuffle();
+
     document.getElementById('start-sort-btn').onclick = bubbleSort;
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
@@ -34,6 +43,9 @@ document.getElementById('bubble-sort').addEventListener('click', () => {
 })
 
 document.getElementById('merge-sort').addEventListener('click', () => {
+    if (activeSortHandle.id == 'merge-sort') return;
+    if (animationOngoing) reshuffle();
+
     document.getElementById('start-sort-btn').onclick = mergeSortRecur;
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
@@ -44,6 +56,9 @@ document.getElementById('merge-sort').addEventListener('click', () => {
 })
 
 document.getElementById('quick-sort').addEventListener('click', () => {
+    if (activeSortHandle.id == 'quick-sort') return;
+    if (animationOngoing) reshuffle();
+
     document.getElementById('start-sort-btn').onclick = quicksort;
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
@@ -54,7 +69,9 @@ document.getElementById('quick-sort').addEventListener('click', () => {
 })
 
 document.getElementById('counting-sort').addEventListener('click', () => {
+    if (activeSortHandle.id == 'counting-sort') return;
     let previousSortHandleID = activeSortHandle.id;
+
     document.getElementById('start-sort-btn').onclick = countingSort;
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');

@@ -45,14 +45,23 @@ function updateMainArrayContent(event, customArray) {
 
 /* "reshuffle-btn" event handler using the Fisher-Yates algorithm */
 function reshuffle() {
+    if (animationOngoing) {
+        if (activeSortHandle.id == 'merge-sort' || activeSortHandle.id == 'quick-sort' || activeSortHandle.id == 'counting-sort') {
+            updateMainArrayContent(undefined, valsToSort);
+        } else cancelPendingJobs();
+    }
+    
     for (let i = randNumArray.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1)); //This statement needs to use "Math.floor()" in conjunction with the expression "(i + 1)" instead of using "Math.round()" in conjuction with the expression "i", since Math.round() has a probability distribution over the range of return values that is skewed at both tails (in most cases) whereby the lowest possible integer and the highest possible integer have half the probability of being returned than any integer in-between them.
 
         let temp = randNumArray[j]; randNumArray[j] = randNumArray[i]; randNumArray[i] = temp;
         temp = elems[j]; elems[j] = elems[i]; elems[i] = temp;
     }
-    elems.forEach(elemStylePositioner); //Reposition each main array subelement at the right position
-    resetArrayItemsColor();
+
+    setTimeout(() => { //This "setTimeout" delayed execution of is required in order for FF to properly process transitions on DOM "array items", if "setTimeout" is omitted FF skips all transitions that would normally be induced by code within $reshuffle. Chrome does not have this issue and would not require this delayed execution of code.
+        elems.forEach(elemStylePositioner); //Reposition each main array subelement at the right position
+        resetArrayItemsColor();
+    }, 5)
 };
 
 /* "Manual input array" form handler */

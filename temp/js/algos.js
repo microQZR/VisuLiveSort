@@ -2,6 +2,7 @@ let speed = 1;
 
 //Selection sort algorithm
 function selectionSort() {
+    animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
     disableSlideDrag();
@@ -32,12 +33,17 @@ function selectionSort() {
         setTimeout(e_i => e_i.style.backgroundColor = "var(--main-green)", 300 * tick++, elems[i]);
     }
 
-    setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(enableSlideDrag, 300 * tick++);
+    setTimeout(() => {
+        enableSlideDrag();
+        animationOngoing = false;
+    }, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
 //Insertion sort algorithm
 function insertionSort() {
+    animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
     disableSlideDrag();
@@ -70,12 +76,17 @@ function insertionSort() {
         valsToSort[j + 1] = testVal;
     }
 
-    setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(enableSlideDrag, 300 * tick++);
+    setTimeout(() => {
+        enableSlideDrag();
+        animationOngoing = false;
+    }, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
 //Bubble sort algorithm
 function bubbleSort() {
+    animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
     disableSlideDrag();
@@ -121,7 +132,11 @@ function bubbleSort() {
         }
     }
 
-    setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(enableSlideDrag, 300 * tick++);
+    setTimeout(() => {
+        enableSlideDrag();
+        animationOngoing = false;
+    }, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
@@ -259,6 +274,7 @@ function mergeSortRecur() {
 
 //Quicksort algorithm
 function quicksort() {
+    animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
     disableSlideDrag();
@@ -330,7 +346,10 @@ function quicksort() {
 
     sort(0, valsToSort.length - 1);
 
-    setTimeout(enableSlideDrag, 300 * tick++);
+    setTimeout(() => {
+        enableSlideDrag();
+        animationOngoing = false;
+    }, 300 * tick++);
     console.log(valsToSort); //This shall be removed for production.
 };
 

@@ -54,6 +54,7 @@ document.getElementById('quick-sort').addEventListener('click', () => {
 })
 
 document.getElementById('counting-sort').addEventListener('click', () => {
+    let previousSortHandleID = activeSortHandle.id;
     document.getElementById('start-sort-btn').onclick = countingSort;
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
@@ -62,11 +63,17 @@ document.getElementById('counting-sort').addEventListener('click', () => {
     activeSortHandle.classList.add('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.add('active');
 
-    (function setupCountingSortArray() {
-        let countingSortArray = newRandNumArray(count, 10);
-        maxNumVal = 10;
-        updateMainArrayContent(undefined, countingSortArray);
-    })();
+    if (animationOngoing && previousSortHandleID == 'merge-sort') {
+        document.getElementById("buffer-array").parentElement.removeChild(document.getElementById("buffer-array"));
+        
+        let mainArray = document.querySelector('.main-array');
+        let newMainArray = mainArray.cloneNode(false);
+        newMainArray.style.height = "90%";
+        mainArray.parentElement.style.justifyContent = "center";
+        mainArray.parentElement.replaceChild(newMainArray, mainArray);
+    }
+    animationOngoing = false;
+    updateMainArrayContent(1); //Pretend to be handling an event by passing an argument to the first parameter.
 })
 
 

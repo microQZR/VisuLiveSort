@@ -1,3 +1,4 @@
+let animationOngoing = false;
 let activeSortHandle = document.getElementById('selection-sort');
 document.getElementById('start-sort-btn').onclick = selectionSort;
 

@@ -142,6 +142,7 @@ function mergeSortRecur() {
         document.querySelectorAll(".slider-handle").forEach(value => value.style.display = "none");
     })();
     
+    animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
     disableSlideDrag();
@@ -235,6 +236,7 @@ function mergeSortRecur() {
     }
 
     function restoreLayout() {
+        animationOngoing = false; //!Important to set it here to avoid issues when calling $updateMainArrayContent
         document.getElementById("buffer-array").parentElement.removeChild(document.getElementById("buffer-array"));
         
         let mainArray = document.querySelector('.main-array');
@@ -247,8 +249,12 @@ function mergeSortRecur() {
         elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
     };
 
-    setTimeout(restoreLayout, tickTime);
-    setTimeout(enableSlideDrag, tickTime + 10);
+    // setTimeout(restoreLayout, tickTime);
+    // setTimeout(enableSlideDrag, tickTime + 10);
+    setTimeout(() => {
+        restoreLayout();
+        enableSlideDrag();
+    }, tickTime)
 }
 
 //Quicksort algorithm
@@ -354,6 +360,7 @@ function countingSort() {
     })();
 
     //Animation main section start
+    animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
     disableSlideDrag();
@@ -419,6 +426,7 @@ function countingSort() {
 
     //For restoring the layout at animation end
     function restoreLayout() {
+        animationOngoing = false; //!Important to set it here to avoid issues when calling $updateMainArrayContent
         document.querySelector('.counting-sort-container').parentElement.removeChild(document.querySelector('.counting-sort-container'));
         
         let mainArray = document.querySelector('.main-array');
@@ -431,7 +439,11 @@ function countingSort() {
         elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
     };
 
-    setTimeout(restoreLayout, 300 * tick++);
-    setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(restoreLayout, 300 * tick++);
+    // setTimeout(enableSlideDrag, 300 * tick++);
+    setTimeout(() => {
+        restoreLayout();
+        enableSlideDrag();
+    }, 300 * tick++)
 }
 

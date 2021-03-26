@@ -10,7 +10,28 @@ document.getElementById('manual-array').addEventListener('click', clearFormError
 /* "nra-btn" event handler */// --> Updates all parameters and variables required by "utilities.js", reexecutes all relevant statements (excludes variable declarations) from "utilities.js", sets $maxNumVal if directly invoked as event handler callback and executes "generateHTMLMainArray()".
 function updateMainArrayContent(event, customArray) {
     cancelPendingJobs();
-    if (event) maxNumVal = 100; //Sets $maxNumVal if "updateMainArrayContent()" is directly invoked as event handler callback
+    if (animationOngoing && activeSortHandle.id == 'merge-sort') {
+        document.getElementById("buffer-array").parentElement.removeChild(document.getElementById("buffer-array"));
+        
+        let mainArray = document.querySelector('.main-array');
+        let newMainArray = mainArray.cloneNode(false);
+        newMainArray.style.height = "90%";
+        mainArray.parentElement.style.justifyContent = "center";
+        mainArray.parentElement.replaceChild(newMainArray, mainArray);
+    }
+
+    if (animationOngoing && activeSortHandle.id == 'counting-sort') {
+        document.querySelector('.counting-sort-container').parentElement.removeChild(document.querySelector('.counting-sort-container'));
+        
+        let mainArray = document.querySelector('.main-array');
+        let newMainArray = mainArray.cloneNode(false);
+        newMainArray.style.height = "90%";
+        mainArray.parentElement.style.justifyContent = "center";
+        mainArray.parentElement.replaceChild(newMainArray, mainArray);
+    }
+
+    animationOngoing = false;
+    if (event) maxNumVal = activeSortHandle.id == 'counting-sort' ? 10 : 100; //Sets $maxNumVal if "updateMainArrayContent()" is directly invoked as event handler callback
     generateHTMLMainArray(customArray); //The argument $customArray would be undefined if "updateMainArrayContent()" is directly invoked as event handler callback, otherwise an array object shall be provided as its value.
     arrElemGap = gap; //**IMPORTANT** $gap is declared in "script.js" and $arrElemGap is declared in "utilities.js"
     arrElemWidth = width; //**IMPORTANT** $width is declared in "script.js" and $arrElemWidth is declared in "utilities.js"

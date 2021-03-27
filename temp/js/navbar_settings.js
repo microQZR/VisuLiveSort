@@ -126,3 +126,6 @@ function settingsToggle(){
         this.style.background = "url(./css/whitecross.svg) var(--main-blue) no-repeat 6.5px";
     }
 }
+
+//The following statement positions div#size-handle to an initial position (which does not exactly correspond to the initial value of $arrSizeSliderVal, but roughly does)
+document.getElementById('size-handle').style.left = "20px";

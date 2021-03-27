@@ -114,6 +114,12 @@ function h_dragOn(e) {
     target.style.left = trackWidth * sliderVal - targetHalfHeight + 'px'; //Updates the position of the slider handle using CSS
     // target.textContent = Math.round(sliderVal * maxNumVal); //Updates the number displayed within the slider handle through the HTML content
     // sliderBar.style.height = trackHeight * sliderVal + 'px'; //Updates the position of the "slider-bar"'s height using CSS
+
+    if (e.pageX >= leftmostPos && e.pageX <= rightmostPos && target.id === "size-handle") {
+        arrSizeSliderVal = sliderVal;
+        calculateWidthGapCount();
+        updateMainArrayContent();
+    }
 };
 
 //Drag action termination event handler

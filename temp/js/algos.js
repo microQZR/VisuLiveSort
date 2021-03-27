@@ -1,7 +1,19 @@
 let speed = 1;
 
+//Utility function which resets the main DOM array if another run of animation is already ongoinig.
+function resetActiveAnimation() {
+    if (animationOngoing) {
+        for (let i = randNumArray.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            let temp = randNumArray[j]; randNumArray[j] = randNumArray[i]; randNumArray[i] = temp;
+        }
+        updateMainArrayContent(undefined, randNumArray);
+    }
+};
+
 //Selection sort algorithm
 function selectionSort() {
+    resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
@@ -43,6 +55,7 @@ function selectionSort() {
 
 //Insertion sort algorithm
 function insertionSort() {
+    resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
@@ -86,6 +99,7 @@ function insertionSort() {
 
 //Bubble sort algorithm
 function bubbleSort() {
+    resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
@@ -142,6 +156,8 @@ function bubbleSort() {
 
 //Merge sort algorithm
 function mergeSortRecur() {
+    resetActiveAnimation();
+
     (function changeLayout() {
         //The following lines reformat the layout of the div#main-array.main-array by creating a new one and replacing the old with the new.
         let mainArray = document.querySelector('.main-array');
@@ -274,6 +290,7 @@ function mergeSortRecur() {
 
 //Quicksort algorithm
 function quicksort() {
+    resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
     initialTimerID = setTimeout(() => {});
@@ -355,6 +372,8 @@ function quicksort() {
 
 //Counting sort algorithm
 function countingSort() {
+    resetActiveAnimation();
+
     //For changing the layout at animation start
     (function changeLayout() {
         //The following lines reformat the layout of the div#main-array.main-array by creating a new one and replacing the old with the new.

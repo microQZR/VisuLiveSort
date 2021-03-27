@@ -67,7 +67,12 @@ function dragOn(e) {
 function dragFini(e) {
     document.onmouseup = null;
     document.onmousemove = null;
-    randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = sliderVal * maxNumVal;
+    randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = Math.round(sliderVal * maxNumVal);
+    
+    let roundedSliderVal = Math.round(sliderVal * maxNumVal) / maxNumVal;
+    target.style.top = trackHeight * (1 - roundedSliderVal) - targetHalfHeight + 'px'; //Updates the position of the slider handle using CSS
+    sliderBar.style.height = trackHeight * roundedSliderVal + 'px'; //Updates the position of the "slider-bar"'s height using CSS
+
 };
 
 //Attaching initialization event handlers

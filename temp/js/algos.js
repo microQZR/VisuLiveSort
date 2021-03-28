@@ -1,4 +1,21 @@
-let speed = 1;
+//Declarations for the speed/timer system
+let speedSliderVal = 0.5, speedInterval, intervalHighBound, intervalLowBound;
+//Utility function which calculates the timer interval for selection, insertion and bubble sorts
+function calculateSpeedInterval() {
+    speedInterval = (intervalLowBound + (intervalHighBound - intervalLowBound) * (1 - speedSliderVal)) / (count / 10);
+}
+//Utility function which calculates the timer interval for merge sort
+function calculateSpeedIntervalMerge() {
+    speedInterval = (intervalLowBound + (intervalHighBound - intervalLowBound) * (1 - speedSliderVal)) / Math.sqrt(count / 10);
+}
+//Utility function which calculates the timer interval for quicksort
+function calculateSpeedIntervalQuick(){
+    speedInterval = (intervalLowBound + (intervalHighBound - intervalLowBound) * (1 - speedSliderVal)) / Math.pow((count / 10), (1 / 1.45));
+}
+//Utility function which calculates the timer interval for counting sort
+function calculateSpeedIntervalCounting() {
+    speedInterval = (intervalLowBound + (intervalHighBound - intervalLowBound) * (1 - speedSliderVal)) / Math.pow((count / 10), (1 / 4.25));
+}
 
 //Utility function which resets the main DOM array if another run of animation is already ongoinig.
 function resetActiveAnimation() {
@@ -13,6 +30,10 @@ function resetActiveAnimation() {
 
 //Selection sort algorithm
 function selectionSort() {
+    intervalHighBound = 350;
+    intervalLowBound = 75;
+    calculateSpeedInterval();
+
     resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
@@ -22,39 +43,43 @@ function selectionSort() {
 
     for (let i = 0; i < valsToSort.length; i++) {
         let swapIndex = i;
-        setTimeout((e_i) => e_i.style.backgroundColor = "var(--main-magenta)", 300 * tick++, elems[i]);
+        setTimeout((e_i) => e_i.style.backgroundColor = "var(--main-magenta)", speedInterval * tick++, elems[i]);
         for (let j = i + 1; j < valsToSort.length; j++) {
-            setTimeout(e_j => e_j.style.backgroundColor = "var(--main-yellow)", 300 * tick++, elems[j]);
+            setTimeout(e_j => e_j.style.backgroundColor = "var(--main-yellow)", speedInterval * tick++, elems[j]);
             if (valsToSort[j] < valsToSort[swapIndex]) {
                 setTimeout((bool, e_swapIndex, e_j) => {
                     if (bool) e_swapIndex.style.backgroundColor = "var(--main-blue)";
                     e_j.style.backgroundColor = "var(--main-magenta)";
-                }, 300 * tick++, (swapIndex !== i), elems[swapIndex], elems[j]);
+                }, speedInterval * tick++, (swapIndex !== i), elems[swapIndex], elems[j]);
                 swapIndex = j;
-            } else setTimeout(e_j => e_j.style.backgroundColor = "var(--main-blue)", 300 * tick++, elems[j]);
+            } else setTimeout(e_j => e_j.style.backgroundColor = "var(--main-blue)", speedInterval * tick++, elems[j]);
         }
         if (i !== swapIndex) {
             setTimeout((e_i, e_swapIndex) => {
                 elemStylePositioner(e_i, swapIndex);
                 elemStylePositioner(e_swapIndex, i);
                 e_i.style.backgroundColor = "var(--main-blue)";
-            }, 300 * tick++, elems[i], elems[swapIndex]);
+            }, speedInterval * tick++, elems[i], elems[swapIndex]);
             [valsToSort[i], valsToSort[swapIndex]] = [valsToSort[swapIndex], valsToSort[i]];
             [elems[i], elems[swapIndex]] = [elems[swapIndex], elems[i]];
         }
-        setTimeout(e_i => e_i.style.backgroundColor = "var(--main-green)", 300 * tick++, elems[i]);
+        setTimeout(e_i => e_i.style.backgroundColor = "var(--main-green)", speedInterval * tick++, elems[i]);
     }
 
-    // setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         enableSlideDrag();
         animationOngoing = false;
-    }, 300 * tick++);
+    }, speedInterval * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
 //Insertion sort algorithm
 function insertionSort() {
+    intervalHighBound = 350;
+    intervalLowBound = 75;
+    calculateSpeedInterval();
+
     resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
@@ -64,9 +89,9 @@ function insertionSort() {
 
     for (let i = 1; i < valsToSort.length; i++) {
         let j, testVal = valsToSort[i], focusedElement = elems[i];
-        setTimeout(() => focusedElement.style.backgroundColor = "var(--main-magenta)", 300 * tick++);
+        setTimeout(() => focusedElement.style.backgroundColor = "var(--main-magenta)", speedInterval * tick++);
         for (j = i - 1; j >= 0; j--) {
-            setTimeout(e_j => e_j.style.backgroundColor = "var(--main-yellow)", 300 * tick++, elems[j]);
+            setTimeout(e_j => e_j.style.backgroundColor = "var(--main-yellow)", speedInterval * tick++, elems[j]);
             if (testVal < valsToSort[j]) {
                 elems[j+1] = elems[j];
                 valsToSort[j+1] = valsToSort[j];
@@ -75,13 +100,13 @@ function insertionSort() {
                     elemStylePositioner(e_j, local_j + 1);
                     e_j.style.backgroundColor = "var(--main-green)";
                     if (local_j === 0) focusedElement.style.backgroundColor = "var(--main-green)";
-                }, 300 * tick++, j, elems[j]);
+                }, speedInterval * tick++, j, elems[j]);
             }
             else {
                 setTimeout(e_j => {
                     e_j.style.backgroundColor = "var(--main-green)";
                     focusedElement.style.backgroundColor = "var(--main-green)";
-                }, 300 * tick++, elems[j]);
+                }, speedInterval * tick++, elems[j]);
                 break;
             }
         }
@@ -89,16 +114,20 @@ function insertionSort() {
         valsToSort[j + 1] = testVal;
     }
 
-    // setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         enableSlideDrag();
         animationOngoing = false;
-    }, 300 * tick++);
+    }, speedInterval * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
 //Bubble sort algorithm
 function bubbleSort() {
+    intervalHighBound = 350;
+    intervalLowBound = 75;
+    calculateSpeedInterval();
+
     resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
@@ -113,18 +142,18 @@ function bubbleSort() {
                 e_j_minus.style.backgroundColor = "var(--main-blue)";
                 e_j.style.backgroundColor = "var(--main-magenta)";
                 e_j_plus.style.backgroundColor = "var(--main-yellow)";
-            }, 300 * tick++, elems[j], elems[j+1], elems[j-1]);
+            }, speedInterval * tick++, elems[j], elems[j+1], elems[j-1]);
             else setTimeout((e_j, e_j_plus) => {
                 e_j.style.backgroundColor = "var(--main-magenta)";
                 e_j_plus.style.backgroundColor = "var(--main-yellow)";
-            }, 300 * tick++, elems[j], elems[j+1], elems[j-1]);
+            }, speedInterval * tick++, elems[j], elems[j+1], elems[j-1]);
 
             if (valsToSort[j] > valsToSort[j+1]) {
                 setTimeout((e_j, e_j_plus, local_j) => {
                     e_j_plus.style.backgroundColor = "var(--main-blue)";
                     elemStylePositioner(e_j, local_j + 1);
                     elemStylePositioner(e_j_plus, local_j);
-                }, 300 * tick++, elems[j], elems[j+1], j);
+                }, speedInterval * tick++, elems[j], elems[j+1], j);
                 [elems[j], elems[j+1]] = [elems[j+1], elems[j]];
                 [valsToSort[j], valsToSort[j+1]] = [valsToSort[j+1], valsToSort[j]];
                 swap = true;
@@ -134,28 +163,33 @@ function bubbleSort() {
         setTimeout((e_tail, e_tail_minus) => { //Sets the sorted tail color
             e_tail.style.backgroundColor = "var(--main-green)";
             e_tail_minus.style.backgroundColor = "var(--main-blue)";
-        }, 300 * tick++, elems[elems.length - 1 - i], elems[elems.length - 2 - i])
+        }, speedInterval * tick++, elems[elems.length - 1 - i], elems[elems.length - 2 - i])
         if (!swap) { //Final color sweep when all is sorted due to no swapped being performed in this iteration
-            let nextTickTime = tick * 300;
+            let nextTickTime = tick * speedInterval;
             for (let j = 0; j < valsToSort.length - i; j++) {
                 setTimeout(e_j => e_j.style.backgroundColor = "var(--main-green)", nextTickTime, elems[j]);
                 nextTickTime += 15; 
             }
-            tick = Math.ceil(nextTickTime / 300);
+            tick = Math.ceil(nextTickTime / speedInterval);
             break;
         }
     }
 
-    // setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         enableSlideDrag();
         animationOngoing = false;
-    }, 300 * tick++);
+    }, speedInterval * tick++);
     console.log(valsToSort); //This shall be removed for production.
 }
 
 //Merge sort algorithm
 function mergeSortRecur() {
+    intervalHighBound = 500;
+    intervalLowBound = 160;
+    calculateSpeedIntervalMerge();
+    console.log("speedInterval:", speedInterval); //This shal be removed for production.
+
     resetActiveAnimation();
 
     (function changeLayout() {
@@ -195,7 +229,7 @@ function mergeSortRecur() {
     function merge(p, q, r) {
         setTimeout(() => {
             for (let i = p; i <= r; i++) elems[i].style.backgroundColor = "var(--main-yellow)";
-        } , 400 * tick++);
+        } , speedInterval * tick++);
 
         const length_pq = q - p + 1;
         for (let i = 0; i < length_pq; i++) buffer[i] = valsToSort[p + i]; //Copy only the first sub-array to merge into the buffer
@@ -204,13 +238,13 @@ function mergeSortRecur() {
                 elems[p + i].parentElement.style.bottom = `-${dropDist}px`;
                 elemsBuffer[i] = elems[p + i];
             }
-        }, 400 * tick++)
+        }, speedInterval * tick++)
 
         let i = 0, j = q + 1, k = p;
         // setTimeout((local_i, local_j) => {
         //     elemsBuffer[local_i].style.backgroundColor = "var(--main-magenta)";
         //     elems[local_j].style.backgroundColor = "var(--main-magenta)";
-        // }, 400 * tick++, i, j);
+        // }, speedInterval * tick++, i, j);
         while (i < length_pq && j < r + 1) {
             if (buffer[i] <= valsToSort[j]) {
                 setTimeout((local_k, local_i) => {
@@ -220,7 +254,7 @@ function mergeSortRecur() {
 
                     elemsBuffer[local_i].style.backgroundColor = "var(--main-green)";
                     // if (local_i !== length_pq - 1) elemsBuffer[local_i + 1].style.backgroundColor = "var(--main-magenta)";
-                }, 400 * tick++, k, i);
+                }, speedInterval * tick++, k, i);
                 valsToSort[k] = buffer[i++];
             } //If lowest element in buffer is smaller than the lowest element in the 2nd sub-array, copy the lowest element from the buffer into the next available slot of the merged array segment.
             else {
@@ -230,7 +264,7 @@ function mergeSortRecur() {
 
                     elems[local_j].style.backgroundColor = "var(--main-green)";
                     // if (local_j !== r) elems[local_j + 1].style.backgroundColor = "var(--main-magenta)";
-                }, 400 * tick++, k, j);
+                }, speedInterval * tick++, k, j);
                 valsToSort[k] = valsToSort[j++]; //If the above is not true, copy the lowest element from the 2nd sub-array directly into the next available slot of the merged array segment.
             }
             k++;
@@ -243,27 +277,27 @@ function mergeSortRecur() {
 
                 elemsBuffer[local_i].style.backgroundColor = "var(--main-green)";
                 // if (local_i !== length_pq - 1) elemsBuffer[local_i + 1].style.backgroundColor = "var(--main-magenta)";
-            }, 400 * tick++, k, i);
+            }, speedInterval * tick++, k, i);
             valsToSort[k++] = buffer[i++]; //Copies the remaining elements of the buffer if the elements of the 2nd sub-array is spent. If the elements in the buffer would be spent, no need to copy over the remaining elements of the 2nd sub-array as they would be already in right place.
         }
 
-        while (j < r + 1) setTimeout(local_j => elems[local_j].style.backgroundColor = "var(--main-green)", 400 * tick++, j++); //For visual effects only.
+        while (j < r + 1) setTimeout(local_j => elems[local_j].style.backgroundColor = "var(--main-green)", speedInterval * tick++, j++); //For visual effects only.
 
         setTimeout(() => {
             for (let i = p; i <= r; i++) elems[i].style.backgroundColor = "var(--main-blue)";
-        } , 400 * tick++);
+        } , speedInterval * tick++);
     }
 
     mergeSort(0, valsToSort.length - 1);
     console.log(valsToSort); //This shall be removed for production.
 
-    let tickTime = 400 * tick;
+    let tickTime = speedInterval * tick;
     for (let i = 0; i <= elems.length; i++) {
         setTimeout(() => {
             if (i !== elems.length) elems[i].style.backgroundColor = "var(--main-magenta)";
             if (i !== 0) elems[i - 1].style.backgroundColor = "var(--main-green)";
         }, tickTime);
-        tickTime += 50;
+        tickTime += (50 / Math.sqrt(count / 10));
     }
 
     function restoreLayout() {
@@ -290,6 +324,11 @@ function mergeSortRecur() {
 
 //Quicksort algorithm
 function quicksort() {
+    intervalHighBound = 320;
+    intervalLowBound = 85;
+    calculateSpeedIntervalQuick();
+    console.log("speedInterval:", speedInterval);
+
     resetActiveAnimation();
     animationOngoing = true;
     let tick = 0;
@@ -299,7 +338,7 @@ function quicksort() {
     //The recursive sort function
     function sort(lo, hi) {
         if (lo >= hi) {
-            if (lo == hi) setTimeout(() => elems[hi].style.backgroundColor = "var(--main-green)", 300 * tick++);
+            if (lo == hi) setTimeout(() => elems[hi].style.backgroundColor = "var(--main-green)", speedInterval * tick++);
             return; //Return immediately if this call corresponds to the base case scenarios of a single-element partition or a zero-element partition.
         }
 
@@ -317,7 +356,7 @@ function quicksort() {
     function partition(lo, hi) {
         setTimeout(() => {
             for (let i = lo; i <= hi; i++) elems[i].style.backgroundColor = "var(--main-yellow)";
-        }, 300 * tick++);
+        }, speedInterval * tick++);
 
         let pivotVal = valsToSort[hi];
         let swapIndex = lo; //A pointer indicating the next position of the valsToSortay to swap into.
@@ -325,22 +364,22 @@ function quicksort() {
         setTimeout(() => {
             elems[hi].style.backgroundColor = "var(--main-magenta)";
             // e_swapIndex.style.backgroundColor = "var(--main-magenta)";
-        }, 300 * tick++, hi, elems[swapIndex]);
+        }, speedInterval * tick++, hi, elems[swapIndex]);
 
         for (let i = lo; i < hi; i++) {
             setTimeout((local_i, local_swapIndex) => {
                 elems[local_i].style.backgroundColor = "var(--main-magenta)";
                 if (local_i !== lo) elems[local_i - 1].style.backgroundColor = "var(--main-yellow)";
                 elems[local_swapIndex].style.backgroundColor = "var(--main-magenta)";
-            }, 300 * tick++, i, swapIndex);
+            }, speedInterval * tick++, i, swapIndex);
 
             if (valsToSort[i] < pivotVal) {
                 setTimeout((local_i, local_swapIndex) => {
                     elemStylePositioner(elems[local_i], local_swapIndex);
                     elemStylePositioner(elems[local_swapIndex], local_i);
                     [elems[local_i], elems[local_swapIndex]] = [elems[local_swapIndex], elems[local_i]];
-                }, 300 * tick++, i, swapIndex);
-                setTimeout(local_swapIndex => elems[local_swapIndex].style.backgroundColor = "var(--main-yellow)", 300 * tick++, swapIndex);
+                }, speedInterval * tick++, i, swapIndex);
+                setTimeout(local_swapIndex => elems[local_swapIndex].style.backgroundColor = "var(--main-yellow)", speedInterval * tick++, swapIndex);
 
                 [valsToSort[i], valsToSort[swapIndex]] = [valsToSort[swapIndex], valsToSort[i]];
                 swapIndex++;
@@ -352,12 +391,12 @@ function quicksort() {
             elemStylePositioner(elems[hi], swapIndex);
             elemStylePositioner(elems[swapIndex], hi);
             [elems[hi], elems[swapIndex]] = [elems[swapIndex], elems[hi]];
-        }, 300 * tick++)
+        }, speedInterval * tick++)
 
         setTimeout(() => {
             for (let i = lo; i <= hi; i++) elems[i].style.backgroundColor = "var(--main-blue)";
             elems[swapIndex].style.backgroundColor = "var(--main-green)";
-        }, 300 * tick++);
+        }, speedInterval * tick++);
         return swapIndex;
     };
 
@@ -366,12 +405,17 @@ function quicksort() {
     setTimeout(() => {
         enableSlideDrag();
         animationOngoing = false;
-    }, 300 * tick++);
+    }, speedInterval * tick++);
     console.log(valsToSort); //This shall be removed for production.
 };
 
 //Counting sort algorithm
 function countingSort() {
+    intervalHighBound = 345;
+    intervalLowBound = 120;
+    calculateSpeedIntervalCounting();
+    console.log("speedInterval:", speedInterval);
+
     resetActiveAnimation();
 
     //For changing the layout at animation start
@@ -416,14 +460,14 @@ function countingSort() {
             keysHTML[local_value].style.color = "#fff";
             keyOccurrencesHTML[local_value].textContent = local_count_value;
             keyOccurrencesHTML[local_value].style.textShadow = "var(--main-magenta) 0 0 10px";
-        }, 300 * tick++, elems[index], value, count[value]);
+        }, speedInterval * tick++, elems[index], value, count[value]);
         
         setTimeout((e_index, local_value) => {
             e_index.parentElement.style.opacity = "0%"; //Set this to elems[index].parentElement.style.opacity
             keysHTML[local_value].style.backgroundColor = "var(--main-yellow)";
             keysHTML[local_value].style.color = "var(--main-purple)";
             keyOccurrencesHTML[local_value].style.textShadow = "none";
-        }, 300 * tick++, elems[index], value);
+        }, speedInterval * tick++, elems[index], value);
     })
 
     count.forEach((value, index) => {
@@ -439,7 +483,7 @@ function countingSort() {
     });
     
     tick += 1 //Setting extra delay on setTimeout timer to avoid visual artifact 
-    setTimeout(() => elems.forEach(elemStylePositioner), 300 * tick++)
+    setTimeout(() => elems.forEach(elemStylePositioner), speedInterval * tick++)
     tick += 1 //Setting extra delay on setTimeout timer to avoid visual artifact 
     elems.forEach((value, index) => {
         setTimeout(() => {
@@ -450,16 +494,16 @@ function countingSort() {
             // keysHTML[valsToSort[index]].style.color = "#fff";
             keyOccurrencesHTML[valsToSort[index]].textContent = parseInt(keyOccurrencesHTML[valsToSort[index]].textContent) - 1;
             keyOccurrencesHTML[valsToSort[index]].style.textShadow = "var(--main-magenta) 0 0 5px";
-        }, 300 * tick);
+        }, speedInterval * tick);
         tick += 0.5
         setTimeout(() => {
             // keysHTML[valsToSort[index]].style.backgroundColor = "var(--main-yellow)";
             // keysHTML[valsToSort[index]].style.color = "var(--main-purple)";
             keyOccurrencesHTML[valsToSort[index]].style.textShadow = "none";
-        }, 300 * tick);
+        }, speedInterval * tick);
         tick += 0.5
     });
-    setTimeout(() => elems[elems.length - 1].style.backgroundColor = "var(--main-green)", 300 * tick++);
+    setTimeout(() => elems[elems.length - 1].style.backgroundColor = "var(--main-green)", speedInterval * tick++);
     //Animation main section end
 
     //For restoring the layout at animation end
@@ -477,11 +521,11 @@ function countingSort() {
         elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
     };
 
-    // setTimeout(restoreLayout, 300 * tick++);
-    // setTimeout(enableSlideDrag, 300 * tick++);
+    // setTimeout(restoreLayout, speedInterval * tick++);
+    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         restoreLayout();
         enableSlideDrag();
-    }, 300 * tick++)
+    }, speedInterval * tick++)
 }
 

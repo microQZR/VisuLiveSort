@@ -118,7 +118,7 @@ function h_dragOn(e) {
     if (e.pageX >= leftmostPos && e.pageX <= rightmostPos && target.id === "size-handle") {
         arrSizeSliderVal = sliderVal;
         calculateWidthGapCount();
-        updateMainArrayContent();
+        updateMainArrayContent(1);
     }
 };
 
@@ -130,6 +130,8 @@ function h_dragFini(e) {
     if (target.id === "size-handle") {
         console.log("size:", sliderVal)
     } else {
+        speedSliderVal = sliderVal;
+        console.log("Speed setting has been saved! Will take effect on the next run.");
         console.log("speed:", sliderVal)
     }
     // randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = sliderVal * maxNumVal;

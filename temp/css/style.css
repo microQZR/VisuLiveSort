@@ -202,6 +202,7 @@ header nav, header ul, header li {
 	top: -6px;
 	border-radius: 100%;
 	left: -7.5px;
+    transition: 250ms ease-out;
 }
 
 .h-slider-handle:hover {

@@ -100,6 +100,7 @@ document.getElementById('settings-toggle').onclick = settingsToggle;
 function settingsToggle(){
     let settingsBox = document.getElementById('settings-box');
     let settingsContainer = document.getElementById('settings-container');
+    let firstClick = true;
     
     if (settingsBox.classList.contains('open')) {
         settingsBox.classList.remove('open');
@@ -121,11 +122,22 @@ function settingsToggle(){
         
         setTimeout(() => {
             settingsContainer.style.display = "grid";
+            if (firstClick) setTimeout(() => h_sliderHandleInitialPos(), 275); //275 is an empirical finding which is the minimum delay required so that the two div.h-slider-handle can be placed at their actual correct position (i.e. not less).
         }, 200)
 
         this.style.background = "url(./css/whitecross.svg) var(--main-blue) no-repeat 6.5px";
     }
-}
 
-//The following statement positions div#size-handle to an initial position (which does not exactly correspond to the initial value of $arrSizeSliderVal, but roughly does)
-document.getElementById('size-handle').style.left = "20px";
+    //The following function positions the two div.h-slider-handle at their initial position on the first click of div#settings-toggle
+    function h_sliderHandleInitialPos() {
+        firstClick = false;
+        const sliderTrackWidth = document.querySelector('.h-slider-track').offsetWidth;
+        const handleHalfWidth = document.getElementById('size-handle').offsetWidth / 2;
+        document.getElementById('size-handle').style.left = arrSizeSliderVal * sliderTrackWidth - handleHalfWidth + "px";
+        document.getElementById('speed-handle').style.left = speedSliderVal * sliderTrackWidth - handleHalfWidth + "px";
+        setTimeout(() => {
+            document.getElementById('size-handle').style.transition = "none";
+            document.getElementById('speed-handle').style.transition = "none";
+        }, 250) //250 is the initial transition duration set in "style.css"
+    }
+}

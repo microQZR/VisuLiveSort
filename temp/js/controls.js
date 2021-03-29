@@ -84,14 +84,33 @@ function processManualArrayForm(e) {
 
     //User input data validation
     inputVal.forEach((elem, index) => {
+        if (quit) return; //If the $quit flag has been set by a previous iteration, exit this iteration immediately.
+        
         if (Number.isNaN(Number(elem))) {
             inputCtrl.classList.add("invalid");
             document.querySelector('#manual-array-fs > legend').style.visibility = "visible";
             inputCtrl.select();
             quit = true;
             return;
-        } else { inputVal[index] = parseFloat(elem); }
-    }); if (quit) return;
+        } else {
+            const currentNumber = parseFloat(elem); //Parse the current value as a number.
+
+            //If the current value is a number, check whether it is negative and if the current sorting method is "counting sort", check if the value is greater than ten. In both these cases, signal an error.
+            if (currentNumber < 0 || (activeSortHandle.id == 'counting-sort' && currentNumber > 10)) {
+                inputCtrl.classList.add("invalid");
+                document.querySelector('#manual-array-fs > legend').style.visibility = "visible";
+                inputCtrl.select();
+                quit = true;
+                if (currentNumber < 0) console.log("Negative numbers are not accepted as input for this implementation. Please try again.");
+                else console.log("This implementation of counting sort, only accepts keys/numbers of integer values ranging from 0 to 10. Please try again.");
+                return;
+            }
+
+            inputVal[index] = currentNumber; //If the current value passes all checks, store it in $inputVal.
+        }
+    });
+    
+    if (quit) return; //If the $quit flag has been set due to a failed validation test, exit this event handler now.
 
     //If the user input data passes validation, it is used to update the main DOM array.
     maxNumVal = inputVal.reduce((accum, currVal) => accum > currVal ? accum : currVal);

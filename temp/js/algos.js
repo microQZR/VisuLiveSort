@@ -91,7 +91,8 @@ function insertionSort() {
         let j, testVal = valsToSort[i], focusedElement = elems[i];
         setTimeout(() => focusedElement.style.backgroundColor = "var(--main-magenta)", speedInterval * tick++);
         for (j = i - 1; j >= 0; j--) {
-            setTimeout(e_j => e_j.style.backgroundColor = "var(--main-yellow)", speedInterval * tick++, elems[j]);
+            // setTimeout(e_j => e_j.style.backgroundColor = "var(--main-yellow)", speedInterval * tick++, elems[j]);
+            setTimeout(e_j => e_j.style.boxShadow = "var(--yellow-fade2) 0 0 5px 3px", speedInterval * tick++, elems[j]);
             if (testVal < valsToSort[j]) {
                 elems[j+1] = elems[j];
                 valsToSort[j+1] = valsToSort[j];
@@ -99,12 +100,13 @@ function insertionSort() {
                     elemStylePositioner(focusedElement, local_j);
                     elemStylePositioner(e_j, local_j + 1);
                     e_j.style.backgroundColor = "var(--main-green)";
+                    e_j.style.boxShadow = "none";
                     if (local_j === 0) focusedElement.style.backgroundColor = "var(--main-green)";
                 }, speedInterval * tick++, j, elems[j]);
-            }
-            else {
+            } else {
                 setTimeout(e_j => {
                     e_j.style.backgroundColor = "var(--main-green)";
+                    e_j.style.boxShadow = "none";
                     focusedElement.style.backgroundColor = "var(--main-green)";
                 }, speedInterval * tick++, elems[j]);
                 break;
@@ -228,7 +230,7 @@ function mergeSortRecur() {
 
     function merge(p, q, r) {
         setTimeout(() => {
-            for (let i = p; i <= r; i++) elems[i].style.backgroundColor = "var(--main-yellow)";
+            for (let i = p; i <= r; i++) elems[i].style.backgroundColor = "var(--yellow-fade1)";
         } , speedInterval * tick++);
 
         const length_pq = q - p + 1;
@@ -355,7 +357,7 @@ function quicksort() {
     //The partitioning function. This implementation uses Lomuto's partition scheme.
     function partition(lo, hi) {
         setTimeout(() => {
-            for (let i = lo; i <= hi; i++) elems[i].style.backgroundColor = "var(--main-yellow)";
+            for (let i = lo; i <= hi; i++) elems[i].style.backgroundColor = "var(--yellow-fade1)";
         }, speedInterval * tick++);
 
         let pivotVal = valsToSort[hi];
@@ -369,7 +371,7 @@ function quicksort() {
         for (let i = lo; i < hi; i++) {
             setTimeout((local_i, local_swapIndex) => {
                 elems[local_i].style.backgroundColor = "var(--main-magenta)";
-                if (local_i !== lo) elems[local_i - 1].style.backgroundColor = "var(--main-yellow)";
+                if (local_i !== lo) elems[local_i - 1].style.backgroundColor = "var(--yellow-fade1)";
                 elems[local_swapIndex].style.backgroundColor = "var(--main-magenta)";
             }, speedInterval * tick++, i, swapIndex);
 
@@ -379,7 +381,7 @@ function quicksort() {
                     elemStylePositioner(elems[local_swapIndex], local_i);
                     [elems[local_i], elems[local_swapIndex]] = [elems[local_swapIndex], elems[local_i]];
                 }, speedInterval * tick++, i, swapIndex);
-                setTimeout(local_swapIndex => elems[local_swapIndex].style.backgroundColor = "var(--main-yellow)", speedInterval * tick++, swapIndex);
+                setTimeout(local_swapIndex => elems[local_swapIndex].style.backgroundColor = "var(--yellow-fade1)", speedInterval * tick++, swapIndex);
 
                 [valsToSort[i], valsToSort[swapIndex]] = [valsToSort[swapIndex], valsToSort[i]];
                 swapIndex++;
@@ -433,8 +435,8 @@ function countingSort() {
         <div class="counting-sort-title">Number of<br>occurrences:</div>
         </div>`);
         for (let i = 0; i <= 10; i++) { keyCountSection.insertAdjacentHTML("beforeend", `<div class="counting-sort-subunit flex">
-        <div class="counting-sort-key flex" style="width: ${width + gap/2}px; height: ${width + gap/2}px;">${i}</div>
-        <div class="key-occurrence flex" style="width: ${width + gap/2}px; height: ${width + gap/2}px;">0</div>
+        <div class="counting-sort-key flex">${i}</div>
+        <div class="key-occurrence flex">0</div>
         </div>`); }
         document.querySelector('.main-sec-container').appendChild(keyCountSection);
 
@@ -455,16 +457,16 @@ function countingSort() {
         tempElems[value].push(elems[index])
 
         setTimeout((e_index, local_value, local_count_value) => {
-            e_index.style.backgroundColor = "var(--main-magenta)";
-            keysHTML[local_value].style.backgroundColor = "var(--main-magenta)";
+            e_index.style.backgroundColor = "var(--magenta-fade1)";
+            keysHTML[local_value].style.backgroundColor = "var(--magenta-fade1)";
             keysHTML[local_value].style.color = "#fff";
             keyOccurrencesHTML[local_value].textContent = local_count_value;
-            keyOccurrencesHTML[local_value].style.textShadow = "var(--main-magenta) 0 0 10px";
+            keyOccurrencesHTML[local_value].style.textShadow = "var(--magenta-fade1) 0 0 10px";
         }, speedInterval * tick++, elems[index], value, count[value]);
         
         setTimeout((e_index, local_value) => {
             e_index.parentElement.style.opacity = "0%"; //Set this to elems[index].parentElement.style.opacity
-            keysHTML[local_value].style.backgroundColor = "var(--main-yellow)";
+            keysHTML[local_value].style.backgroundColor = "var(--yellow-fade2)";
             keysHTML[local_value].style.color = "var(--main-purple)";
             keyOccurrencesHTML[local_value].style.textShadow = "none";
         }, speedInterval * tick++, elems[index], value);
@@ -482,18 +484,18 @@ function countingSort() {
         for (let i = 0; i < j; i++) elems.push(value.pop());
     });
     
-    tick += 1 //Setting extra delay on setTimeout timer to avoid visual artifact 
+    tick += 1 / (speedInterval / intervalHighBound) //Setting extra delay on setTimeout timer to avoid visual artifact 
     setTimeout(() => elems.forEach(elemStylePositioner), speedInterval * tick++)
-    tick += 1 //Setting extra delay on setTimeout timer to avoid visual artifact 
+    tick += 1 / (speedInterval / intervalHighBound) //Setting extra delay on setTimeout timer to avoid visual artifact 
     elems.forEach((value, index) => {
         setTimeout(() => {
             value.parentElement.style.opacity = "100%"
             if (index !== 0) elems[index - 1].style.backgroundColor = "var(--main-green)";
             
-            // keysHTML[valsToSort[index]].style.backgroundColor = "var(--main-magenta)";
+            // keysHTML[valsToSort[index]].style.backgroundColor = "var(--magenta-fade1)";
             // keysHTML[valsToSort[index]].style.color = "#fff";
             keyOccurrencesHTML[valsToSort[index]].textContent = parseInt(keyOccurrencesHTML[valsToSort[index]].textContent) - 1;
-            keyOccurrencesHTML[valsToSort[index]].style.textShadow = "var(--main-magenta) 0 0 5px";
+            keyOccurrencesHTML[valsToSort[index]].style.textShadow = "var(--magenta-fade1) 0 0 5px";
         }, speedInterval * tick);
         tick += 0.5
         setTimeout(() => {

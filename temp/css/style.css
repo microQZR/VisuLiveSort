@@ -4,8 +4,14 @@
     --main-purple: #6300ff;
     --main-blue: #5CCEFF;
     --main-yellow: #EDE873;
+    --yellow-bright: #FFEE00;
+    --yellow-fade1: #F9EE5A;
+    --yellow-fade2: #FBEE3A;
     --main-green: #30F2C0;
     --main-magenta: #FF58BA;
+    --magenta-bright: #FF0095;
+    --magenta-fade1: #FF4AB4;
+    /* --yellow-fade3: #D9EB6A; */
 }
 
 /* General */
@@ -61,7 +67,6 @@ header nav, header ul, header li {
 
 .nav-text {
     transition: 0.5s;
-    font-weight: 400;
     display: inline-block;
 }
 
@@ -69,8 +74,6 @@ header nav, header ul, header li {
 	background-color: var(--main-purple);
 	padding: 5px 0 5px 10px;
 	border-radius: 100px;
-	font-weight: 400;
-	/* font-weight: 300; */
 }
 
 .nav-collapsable {
@@ -78,7 +81,7 @@ header nav, header ul, header li {
 }
 
 .nav-collapsable.active {
-	background-color: var(--main-yellow);
+	background-color: var(--yellow-fade2);
 	padding: 5px 10px;
 	border-radius: 100px;
 	color: #000;
@@ -351,15 +354,19 @@ footer {
 }
 
 .counting-sort-key {
-    background-color: var(--main-yellow);
+    background-color: var(--yellow-fade2);
     border-radius: 50%;
     /* color: var(--main-magenta); */
     color: var(--main-purple);
     font-weight: 500;
+    width: 2.4em;
+    height: 2.4em;
 }
 
 .key-occurrence {
-    color: var(--main-magenta);
+    color: var(--magenta-fade1);
     font-weight: 700;
+    width: 2.4em;
+    height: 2.4em;
 }
 

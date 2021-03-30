@@ -162,10 +162,11 @@ function bubbleSort() {
             } 
         }
 
-        setTimeout((e_tail, e_tail_minus) => { //Sets the sorted tail color
+        setTimeout((e_tail, e_tail_minus, colorLastItem) => { //Sets the sorted tail color
             e_tail.style.backgroundColor = "var(--main-green)";
             e_tail_minus.style.backgroundColor = "var(--main-blue)";
-        }, speedInterval * tick++, elems[elems.length - 1 - i], elems[elems.length - 2 - i])
+            if (colorLastItem) e_tail_minus.style.backgroundColor = "var(--main-green)"; //This is to treat the special case where the smallest value is initially at the rightmost position/highest index at the beginning of the sort.
+        }, speedInterval * tick++, elems[elems.length - 1 - i], elems[elems.length - 2 - i], elems.length - 2 == i);
         if (!swap) { //Final color sweep when all is sorted due to no swapped being performed in this iteration
             let nextTickTime = tick * speedInterval;
             for (let j = 0; j < valsToSort.length - i; j++) {

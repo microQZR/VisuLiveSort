@@ -53,6 +53,7 @@ function reshuffle() {
             updateMainArrayContent(undefined, valsToSort);
         } else {
             cancelPendingJobs();
+            enableSlideDrag();
             animationOngoing = false;
         }
     }
@@ -64,9 +65,9 @@ function reshuffle() {
         temp = elems[j]; elems[j] = elems[i]; elems[i] = temp;
     }
 
-    setTimeout(() => { //This "setTimeout" delayed execution of is required in order for FF to properly process transitions on DOM "array items", if "setTimeout" is omitted FF skips all transitions that would normally be induced by code within $reshuffle. Chrome does not have this issue and would not require this delayed execution of code.
+    resetArrayItemsColor();
+    setTimeout(() => { //This "setTimeout" delayed execution of code is required in order for FF to properly process transitions on DOM "array items", if "setTimeout" is omitted FF skips all transitions that would normally be induced by code within $reshuffle. Chrome does not have this issue and would not require this delayed execution of code.
         elems.forEach(elemStylePositioner); //Reposition each main array subelement at the right position
-        resetArrayItemsColor();
     }, 5)
 };
 

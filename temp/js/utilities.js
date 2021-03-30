@@ -11,6 +11,7 @@ function enableSlideDrag() {
 
 function resetArrayItemsColor() {
     elems.forEach(elem => elem.style.backgroundColor = "var(--main-blue)");
+    if (activeSortHandle.id == 'insertion-sort') elems.forEach(elem => elem.style.boxShadow = "none");
 }
 
 let initialTimerID;

@@ -1,81 +1,121 @@
+/** Global declarations and inital definitions **/
 let animationOngoing = false;
 let activeSortHandle = document.getElementById('selection-sort');
+const inplaceStatus = document.getElementById('inplace-status');
+const stableStatus = document.getElementById('stable-status');
 document.getElementById('start-sort-btn').onclick = selectionSort;
+
+
+/** Utility functions **/
+function setGreenCheck(statusDiv) {
+    statusDiv.style.height = "30px";
+    statusDiv.style.background = "url(./css/greencheck.svg) no-repeat center / contain"
+}
+
+function setRedCross(statusDiv) {
+    statusDiv.style.height = "25px";
+    statusDiv.style.background = "url(./css/redcross.svg) no-repeat center / contain"
+}
+
 
 /** Navbar Section **/
 document.getElementById('selection-sort').addEventListener('click', () => {
     if (activeSortHandle.id == 'selection-sort') return;
     if (animationOngoing) reshuffle();
-
     document.getElementById('start-sort-btn').onclick = selectionSort;
+
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
-
     activeSortHandle = document.getElementById('selection-sort');
     activeSortHandle.classList.add('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.add('active');
+
+    setGreenCheck(inplaceStatus);
+    setRedCross(stableStatus);
+    document.getElementById('best-time').innerHTML = "Best: O(<i>n</i>²)";
+    document.getElementById('avg-time').innerHTML = "AVG: O(<i>n</i>²)";
+    document.getElementById('worst-time').innerHTML = "Worst: O(<i>n</i>²)";
 });
 
 document.getElementById('insertion-sort').addEventListener('click', () => {
     if (activeSortHandle.id == 'insertion-sort') return;
     if (animationOngoing) reshuffle();
-
     document.getElementById('start-sort-btn').onclick = insertionSort;
+
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
-
     activeSortHandle = document.getElementById('insertion-sort');
     activeSortHandle.classList.add('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.add('active');
+
+    setGreenCheck(inplaceStatus);
+    setGreenCheck(stableStatus);
+    document.getElementById('best-time').innerHTML = "Best: O(<i>n</i>)";
+    document.getElementById('avg-time').innerHTML = "AVG: O(<i>n</i>²)";
+    document.getElementById('worst-time').innerHTML = "Worst: O(<i>n</i>²)";
 })
 
 document.getElementById('bubble-sort').addEventListener('click', () => {
     if (activeSortHandle.id == 'bubble-sort') return;
     if (animationOngoing) reshuffle();
-
     document.getElementById('start-sort-btn').onclick = bubbleSort;
+
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
-
     activeSortHandle = document.getElementById('bubble-sort');
     activeSortHandle.classList.add('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.add('active');
+
+    setGreenCheck(inplaceStatus);
+    setGreenCheck(stableStatus);
+    document.getElementById('best-time').innerHTML = "Best: O(<i>n</i>)";
+    document.getElementById('avg-time').innerHTML = "AVG: O(<i>n</i>²)";
+    document.getElementById('worst-time').innerHTML = "Worst: O(<i>n</i>²)";
 })
 
 document.getElementById('merge-sort').addEventListener('click', () => {
     if (activeSortHandle.id == 'merge-sort') return;
     if (animationOngoing) reshuffle();
-
     document.getElementById('start-sort-btn').onclick = mergeSortRecur;
+
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
-
     activeSortHandle = document.getElementById('merge-sort');
     activeSortHandle.classList.add('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.add('active');
+
+    setRedCross(inplaceStatus);
+    setGreenCheck(stableStatus);
+    document.getElementById('best-time').innerHTML = "Best: O(<i>n</i>⋅log<i>n</i>)";
+    document.getElementById('avg-time').innerHTML = "AVG: O(<i>n</i>⋅log<i>n</i>)";
+    document.getElementById('worst-time').innerHTML = "Worst: O(<i>n</i>⋅log<i>n</i>)";
 })
 
 document.getElementById('quick-sort').addEventListener('click', () => {
     if (activeSortHandle.id == 'quick-sort') return;
     if (animationOngoing) reshuffle();
-
     document.getElementById('start-sort-btn').onclick = quicksort;
+
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
-
     activeSortHandle = document.getElementById('quick-sort');
     activeSortHandle.classList.add('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.add('active');
+
+    setGreenCheck(inplaceStatus);
+    setRedCross(stableStatus);
+    document.getElementById('best-time').innerHTML = "Best: O(<i>n</i>⋅log<i>n</i>))";
+    document.getElementById('avg-time').innerHTML = "AVG: O(<i>n</i>⋅log<i>n</i>)";
+    document.getElementById('worst-time').innerHTML = "Worst: O(<i>n</i>²)";
 })
 
 document.getElementById('counting-sort').addEventListener('click', () => {
     if (activeSortHandle.id == 'counting-sort') return;
     let previousSortHandleID = activeSortHandle.id;
-
     document.getElementById('start-sort-btn').onclick = countingSort;
+
     activeSortHandle.classList.remove('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.remove('active');
-
     activeSortHandle = document.getElementById('counting-sort');
     activeSortHandle.classList.add('active');
     activeSortHandle.querySelector('.nav-collapsable').classList.add('active');
@@ -91,6 +131,12 @@ document.getElementById('counting-sort').addEventListener('click', () => {
     }
     animationOngoing = false;
     updateMainArrayContent(1); //Pretend to be handling an event by passing an argument to the first parameter.
+
+    setRedCross(inplaceStatus);
+    setGreenCheck(stableStatus);
+    document.getElementById('best-time').innerHTML = "Best: O(<i>n</i>)";
+    document.getElementById('avg-time').innerHTML = "AVG: O(<i>n</i>)";
+    document.getElementById('worst-time').innerHTML = "Worst: O(<i>n</i>)";
 })
 
 

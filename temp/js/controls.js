@@ -40,7 +40,10 @@ function updateMainArrayContent(event, customArray) {
     elemsContainerDimen = document.querySelector('.main-array').getBoundingClientRect();
     elems.forEach(elemStylePositioner); //Initially places the unsorted DOM elements within their DOM container
     elems.forEach(elem => { elem.onmousedown = dragSortInit; }); //Attaching the drag-sort action initialization event handler to each array element of $elems
-    document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
+    document.querySelectorAll('.slider-handle').forEach((element) => {
+        fixTextOverflow(element); //Prevents the overflowing of textContent of the span.number-display within $target
+        element.onmousedown = dragInit; //Attaching the drag action initializer to all DOM elements with class="slider-handle"
+    });
 };
 
 /* "reshuffle-btn" event handler using the Fisher-Yates algorithm */

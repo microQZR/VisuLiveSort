@@ -20,6 +20,11 @@ function cancelPendingJobs() {
     // enableSlideDrag();
 };
 
+function fixTextOverflow(sliderHandle) {
+    const numberDisplay = sliderHandle.firstChild;
+    if (Math.hypot(numberDisplay.offsetWidth, numberDisplay.offsetHeight) > sliderHandle.offsetWidth) numberDisplay.textContent = "#";
+    if (Math.hypot(numberDisplay.offsetWidth, numberDisplay.offsetHeight) > sliderHandle.offsetWidth) numberDisplay.textContent = "";
+}
 
 
 /*** For Slider Drag Action ***/
@@ -29,10 +34,12 @@ let target, targetHalfHeight, sliderBar;
 let targetTrack, trackInfo, trackHeight;
 let highestPos, lowestPos;
 let sliderVal = 0; //Declares a globally accessible variable to hold the slider value
+let hasNotMoved = true;
 
 //Drag action initialization event handler
 function dragInit(e) {
     e.preventDefault();
+    hasNotMoved = true;
 
     //Redefining all values used and manipulated by the slider drag action mechanism based on the selected slider handle
     target = this; //This is the currently selected slider handle
@@ -52,6 +59,7 @@ function dragInit(e) {
 //Drag action core event handler
 function dragOn(e) {
     e.preventDefault();
+    hasNotMoved = false;
 
     //Calculates $sliderVal value, which ranges from 0 to 1 based $e.pageY
     if (e.pageY > lowestPos) sliderVal = 0;
@@ -59,7 +67,8 @@ function dragOn(e) {
     else sliderVal = 1;
 
     target.style.top = trackHeight * (1 - sliderVal) - targetHalfHeight + 'px'; //Updates the position of the slider handle using CSS
-    target.textContent = Math.round(sliderVal * maxNumVal); //Updates the number displayed within the slider handle through the HTML content
+    target.firstChild.textContent = Math.round(sliderVal * maxNumVal); //Updates the number displayed within the slider handle through the HTML content
+    fixTextOverflow(target); //Prevents the overflowing of textContent of the span.number-display within $target
     sliderBar.style.height = trackHeight * sliderVal + 'px'; //Updates the position of the "slider-bar"'s height using CSS
 };
 
@@ -67,6 +76,8 @@ function dragOn(e) {
 function dragFini(e) {
     document.onmouseup = null;
     document.onmousemove = null;
+    if (hasNotMoved) return;
+
     randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = Math.round(sliderVal * maxNumVal);
     
     let roundedSliderVal = Math.round(sliderVal * maxNumVal) / maxNumVal;
@@ -76,7 +87,10 @@ function dragFini(e) {
 };
 
 //Attaching initialization event handlers
-document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = dragInit); //Attaching the drag action initializer to all DOM elements with class="slider-handle"
+document.querySelectorAll('.slider-handle').forEach((element) => {
+    fixTextOverflow(element); //Prevents the overflowing of textContent of the span.number-display within $target
+    element.onmousedown = dragInit; //Attaching the drag action initializer to all DOM elements with class="slider-handle"
+});
 
 
 /*** For Horizontal Sliders of Settings Box ***/

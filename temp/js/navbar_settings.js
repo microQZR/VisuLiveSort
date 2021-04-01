@@ -187,3 +187,44 @@ function settingsToggle(){
         }, 250) //250 is the initial transition duration set in "style.css"
     }
 }
+
+
+/** Document Responsivity Section **/
+//Updates the "main section" content on window resize. This system uses a debounce mechanism.
+let debounceID;
+window.addEventListener('resize', () => {
+    clearTimeout(debounceID);
+    debounceID = setTimeout(refreshMainSec, 100);
+});
+function refreshMainSec() {
+    containerMaxWidth = document.querySelector('.main-sec-container').getBoundingClientRect().width;
+    maxCount = containerMaxWidth / (minWidth + minGap);
+    calculateWidthGapCount();
+    updateMainArrayContent(1);
+}
+
+//Creates a mediaQueryList object and attaches an "onchange" event handler to update the navbar UI depending on viewport width.
+const mediaQueryList = window.matchMedia("(max-width: 985px)");
+const openRespNav = document.getElementById('open-responsive-nav');
+const responsiveNav = document.getElementById('responsive-nav');
+mediaQueryList.addListener(e => {
+    if (e.matches) {
+        responsiveNav.appendChild(document.querySelector('nav'));
+        openRespNav.style.display = "block";
+    } else {
+        openRespNav.style.display = "none";
+        openRespNav.insertAdjacentElement('beforebegin', document.querySelector('nav'));
+        responsiveNav.style.right = "-300px";
+    }
+});
+//Immediately updates the navbar UI on page load if media query is satisfied.
+if (mediaQueryList.matches) {
+    responsiveNav.appendChild(document.querySelector('nav'));
+    openRespNav.style.display = "block";
+}
+
+//Attaching event handler for opening the responsive navbar
+openRespNav.onclick = () => responsiveNav.style.right = "0px";
+
+//Attaching event handler for closing the responsive navbar
+document.getElementById('close-responsive-nav').onclick = () => responsiveNav.style.right = "-300px";

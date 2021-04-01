@@ -24,8 +24,15 @@
                     <li class="nav-item flex" id="counting-sort"><span class="nav-text">Counting <span class="nav-collapsable">sort</span></span></li>
                 </ul>
             </nav>
+            <div id="open-responsive-nav"></div>
         </div>
     </header>
+
+    <!-- Responsive Navbar -->
+    <div id="responsive-nav" class="flex">
+        <div id="close-responsive-nav"></div>
+        <div id="resp-nav-title">SORTING MODE</div>
+    </div>
     
     <!-- Main Section -->
     <section class="main-sec flex">
@@ -101,15 +108,15 @@
                 </fieldset>
                 <button type="submit" class="btn" id="manual-array-btn">GO!</button>
             </form>
-            <div class="control flex">
-                <span>New Random<br>Array</span>
+            <div class="control flex" id="nra-control">
+                <span>New Random Array</span>
                 <button class="btn m-12px" id="nra-btn">GO!</button>
             </div>
-            <div class="control">
+            <div class="control" id="reshuffle-control">
                 <span>Reshuffle</span>
                 <button class="btn m-12px" id="reshuffle-btn">GO!</button>
             </div>
-            <div class="control">
+            <div class="control" id="start-sort-control">
                 <span>Start Sort</span>
                 <button class="btn m-12px" id="start-sort-btn">GO!</button>
             </div>

@@ -67,33 +67,6 @@
             <!-- Main Array Insertion Point -->
             <div id="main-array" class="main-array"></div>
         </div>
-        
-            
-        <!-- <div class="testcontainer">
-            <div class="testbox-outer">
-                <div class="main-array-box">
-                    <div class="array-item" id="test1">23</div>
-                    <div class="array-item" id="test2">1</div>
-                    <div class="array-item" id="test3">72</div>
-                    <div class="array-item" id="test4">95</div>
-                    <div class="array-item" id="test5">4</div>
-                    <div class="array-item" id="test6">36</div>
-                    <div class="array-item" id="test7">59</div>
-                    <div class="array-item" id="test8">41</div>
-                    <div class="array-item" id="test9">55</div>
-                    <div class="array-item" id="test10">32</div>
-                </div>
-            </div>
-            <button id="testbtn-1" class="btn m-3">test #1</button>
-            <button id="testbtn-2" class="btn m-3">test #2</button>
-
-            <div class="slider-container" id="track">
-                <div class="slider-bar" id="slider-bar"></div>
-                <div class="slider-circ" id="target"></div>
-            </div>
-
-            <link rel="stylesheet" href="css/test.css">
-        </div> -->
     </section>
 
     <!-- Bottom Controls Section -->
@@ -123,10 +96,31 @@
         </div>
     </section>
 
+    <!-- Footer Section -->
     <footer>
         <div class="footer">Copyright &copy; microQZR 2021</div>
     </footer>
+
+    <!-- Informational Dialogs Section -->
+    <section id="info-dialog-sec" class="flex">
+        <div id="warning-msg-1" class="info-dialog info-warning flex">
+            <div class="info-icon info-warning-icon flex">!</div>
+            Negative numbers are not accepted as input for this implementation. Please try again.
+            <div class="info-dial-dismiss"></div>
+        </div>
+        <div id="warning-msg-2" class="info-dialog info-warning flex">
+            <div class="info-icon info-warning-icon flex">!</div>
+            This implementation of counting sort only accepts keys/numbers of integer values ranging from 0 to 10. Please try again.
+            <div class="info-dial-dismiss"></div>
+        </div>
+        <div id="success-msg-1" class="info-dialog info-success flex">
+            <div class="info-icon info-success-icon"></div>
+            Speed setting has been saved! Will take effect on the next run.
+            <div class="info-dial-dismiss info-success-dismiss"></div>
+        </div>
+    </section>
 </body>
+
 <script src="js/script.js"></script> <!-- "script.js" must be included before "utilities.js" as the drag-sort action mechanism depends on variables declared in "script.js" -->
 <script src="js/utilities.js"></script>
 <script src="js/controls.js"></script>

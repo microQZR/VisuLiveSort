@@ -174,14 +174,12 @@ header nav, header ul, header li {
     position: relative;
     height: 80%;
     width: 70%;
-    outline: 1px solid blue;
+    /* outline: 1px solid blue; */
     flex-direction: column;
-    /* background-color: #00ffbb41; */
-    /* margin: auto; //Not needed due to "display: flex" on parent*/
 }
 
 .main-array {
-    outline: 2px solid red;
+    /* outline: 2px solid red; */
     position: relative;
     height: 90%;
     width: 100%;
@@ -446,6 +444,64 @@ footer {
     font-weight: 700;
     width: 2.4em;
     height: 2.4em;
+}
+
+/* Informational Dialogs */
+.info-dialog {
+    position: fixed;
+    top: -100px;
+    max-width: 80%;
+    padding: 8px;
+    border-radius: 15px;
+    border-radius: 100px;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0%;
+}
+
+.info-dial-dismiss {
+    width: 20px;
+    height: 20px;
+    background: url(thinwhitecross.svg) no-repeat center / contain;
+    border-radius: 20%;
+    border: 1.5px solid;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.info-warning {
+    background-color: #FFC500;
+    color: rgb(255, 255, 255);
+    border: 3px solid #ffe489;
+}
+
+.info-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    border: 1.5px solid;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.info-warning-icon {
+    font-weight: 900;
+    font-size: 1.5em;
+}
+
+.info-success {
+    background-color: #00F48E;
+    /* color: #fff; */
+    border: 3px solid #71ffc4;
+}
+
+.info-success-icon {
+    background: url(blackcheck.svg) no-repeat center / 75% 75%;
+}
+
+.info-success-dismiss {
+    background: url(thinblackcross.svg) no-repeat center / contain;
+    transform: scale(95%);
 }
 
 

@@ -105,8 +105,8 @@ function processManualArrayForm(e) {
                 document.querySelector('#manual-array-fs > legend').style.visibility = "visible";
                 inputCtrl.select();
                 quit = true;
-                if (currentNumber < 0) console.log("Negative numbers are not accepted as input for this implementation. Please try again.");
-                else console.log("This implementation of counting sort, only accepts keys/numbers of integer values ranging from 0 to 10. Please try again.");
+                if (currentNumber < 0) showInfoDialog('warning-msg-1');
+                else showInfoDialog('warning-msg-2');
                 return;
             }
 

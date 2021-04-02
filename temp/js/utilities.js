@@ -29,7 +29,6 @@ function fixTextOverflow(sliderHandle) {
 
 
 /*** For Slider Drag Action ***/
-
 //All variables declared below are defined/redefined by dragInit() and would hold values to be used by the slider drag action mechanism. (i.e. dragInit() and dragOn() )
 let target, targetHalfHeight, sliderBar;
 let targetTrack, trackInfo, trackHeight;
@@ -95,7 +94,6 @@ document.querySelectorAll('.slider-handle').forEach((element) => {
 
 
 /*** For Horizontal Sliders of Settings Box ***/
-
 let trackWidth, leftmostPos, rightmostPos
 
 //Horizontal slider drag action initialization event handler
@@ -146,7 +144,7 @@ function h_dragFini(e) {
         console.log("size:", sliderVal)
     } else {
         speedSliderVal = sliderVal;
-        console.log("Speed setting has been saved! Will take effect on the next run.");
+        showInfoDialog('success-msg-1');
         console.log("speed:", sliderVal)
     }
     // randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = sliderVal * maxNumVal;
@@ -157,7 +155,6 @@ document.querySelectorAll('.h-slider-handle').forEach((element) => element.onmou
 
 
 /*** For drag-sort drag action ***/
-
 //Declaration and definition of tweakable, independent variables
 let arrElemGap = gap; //**IMPORTANT** $gap is declared in "script.js"
 let arrElemWidth = width; //**IMPORTANT** $width is declared in "script.js"
@@ -233,7 +230,32 @@ function dragSortFini(e) {
     target2.style.boxShadow = "none";
 };
 
-
 //Actually executing previously defined code
 elems.forEach(elemStylePositioner); //Initially places the unsorted DOM elements within their DOM container
 elems.forEach(elem => { elem.onmousedown = dragSortInit; }); //Attaching the drag-sort action initialization event handler to each array element of $elems
+
+
+/*** For Informational Dialogs Presentation ***/
+let dialogTimerID;
+let activeInfoDialog = document.getElementById('success-msg-1');
+function showInfoDialog(infoDialogID) {
+    dismissInfoDialog();
+    activeInfoDialog = document.getElementById(infoDialogID);
+    activeInfoDialog.style.transition = "500ms ease-out";
+    activeInfoDialog.style.opacity = "100%";
+    activeInfoDialog.style.top = "30px";
+
+    dialogTimerID = setTimeout(() => {
+        activeInfoDialog.style.opacity = "0%";
+        dialogTimerID = setTimeout(() => activeInfoDialog.style.top = "-100px", 500);
+    }, 3000);
+}
+
+//Event handler for the dismiss button on each info dialog
+function dismissInfoDialog() {
+    clearTimeout(dialogTimerID);
+    activeInfoDialog.style.transition = "none";
+    activeInfoDialog.style.opacity = "0%";
+    activeInfoDialog.style.top = "-100px";
+}
+document.querySelectorAll('.info-dial-dismiss').forEach(value => value.addEventListener("click", dismissInfoDialog));

@@ -237,6 +237,7 @@ header nav, header ul, header li {
     height: 35px;
 
     opacity: 35%;
+    cursor: pointer;
 }
 
 #settings-toggle:hover, .open #settings-toggle {
@@ -409,6 +410,11 @@ footer {
     cursor: pointer;
 }
 
+/* Drag-sort Components */
+.drag-sort-handle:hover {
+    cursor: pointer;
+}
+
 /* Counting Sort Components */
 .counting-sort-container {
     outline: 1px solid red;
@@ -467,6 +473,7 @@ footer {
     border: 1.5px solid;
     margin-left: 10px;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .info-warning {

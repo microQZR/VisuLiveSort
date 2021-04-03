@@ -19,6 +19,10 @@ function cancelPendingJobs() {
     let currentTimerID = setTimeout(() => {});
     for (let i = initialTimerID; i <= currentTimerID; i++) clearTimeout(i);
     // enableSlideDrag();
+
+    //For smoothly clearing up any potentially active info dialog, since the usual info dialog presentation process is also affected by the statements above
+    activeInfoDialog.style.opacity = "0%";
+    setTimeout(() => activeInfoDialog.style.top = "-100px", 500);
 };
 
 function fixTextOverflow(sliderHandle) {
@@ -188,6 +192,7 @@ function dragSortInit(e) {
     target2.parentElement.style.zIndex = 100; //Applying CSS property on the parent instead
     target2.parentElement.style.transition = 'none'; //Applying CSS property on the parent instead
     target2.style.boxShadow = '0px 0px 5px 5px var(--main-green)';
+    document.getElementById('main-array').style.cursor = 'pointer';
 
     //Attaches subcomponent event handlers
     document.onmouseup = dragSortFini;
@@ -228,6 +233,7 @@ function dragSortFini(e) {
     target2.parentElement.style.zIndex = "auto"; //Applying CSS property on the !PARENT! instead
     target2.parentElement.style.transition = "0.5s ease-out"; //Applying CSS property on the !PARENT! instead
     target2.style.boxShadow = "none";
+    document.getElementById('main-array').style.cursor = 'initial';
 };
 
 //Actually executing previously defined code

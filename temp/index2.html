@@ -119,6 +119,92 @@
             <div class="info-dial-dismiss info-success-dismiss"></div>
         </div>
     </section>
+
+    <!-- Welcome Guide Carousel Section -->
+    <section id="carousel-anchor" class="flex">
+        <div id="carousel" class="flex rectangle">
+            <div id="carousel-display">
+                <div id="carousel-roll" class="flex">
+                    <div id="pg-1" class="sm-card flex">
+                        <div class="scroll-container">
+                            <p><strong>Welcome to <span>VisuLiveSort</span></strong>,<br>the ultimate visualization tool for common sorting algorithms.</p>
+                            <p>This application contains interactive features that may help the user build an intuitive understanding of the featured alforithms.
+                            See the next slides for a brief starter guide.</p>
+        
+                            <p><strong>WARNING!</strong> This application contains <strong>FLASHING IMAGES</strong> that may not be suitable for individuals with epileptic disorders. Do not use this website if you have such or similar conditions.</p>
+                        </div>
+                    </div>
+                    <div id="pg-2-1" class="sm-card flex">
+                        <div class="carousel-img flex">
+                            <div class="upper-img">
+                                <img src="./img/pg2-1-1.png" alt="Click on the navbar to select a sorting mode">
+                                <div class="legend">Desktop</div>
+                            </div>
+                            <div class="lower-img">
+                                <img src="./img/pg2-1-2-2.png" alt="Click on the menu to select a sorting mode">
+                                <div class="legend">Mobile</div>
+                            </div>
+                        </div>
+                        <div class="carousel-text flex">Click on the navbar/menu to select a sorting mode.</div>
+                    </div>
+                    <div id="pg-2-2" class="sm-card flex">
+                        <div class="carousel-img">
+                            <img src="./img/pg2-2-composited.png" alt="Using the settings box">
+                        </div>
+                        <div class="carousel-text flex">
+                            <div class="scroll-container">
+                                Click and open the settings box to change the size of the collection to sort and the speed of the sorting.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pg-3-1" class="sm-card flex">
+                        <div class="carousel-img">
+                            <img src="./img/pg3-1.PNG" alt="Adjust item value using the circular handle">
+                        </div>
+                        <div class="carousel-text flex">Click and drag the circular handle on each collection item to change its value.</div>
+                    </div>
+                    <div id="pg-3-2" class="sm-card flex">
+                        <div class="carousel-img">
+                            <img src="./img/pg3-2.png" alt="Manually reorder items to sort by click and drag">
+                        </div>
+                        <div class="carousel-text flex">Click and drag any item of the collection to be sorted to reorder the collection as pleased.</div>
+                    </div>
+                    <div id="pg-4" class="sm-card flex">
+                        <div class="carousel-img">
+                            <img src="./img/pg4.png" alt="Using the input field in botton section to sort custom values">
+                        </div>
+                        <div class="carousel-text flex">
+                            <div class="scroll-container">
+                                <p>Use the input field in the bottom section to enter a set of custom values for the sorting.</p><br>
+                                <p>Custom values are accepted in either of the following formats:</p>
+                                <ol>
+                                    <li>Space-separated list of integer values (e.g.: <span>1 2 3 4</span>)</li>
+                                    <li>Comma-separated list of integer values (e.g.: <span>1, 2, 3</span>) (e.g.: <span>1,2,3</span>)</li>
+                                    <li>Space or comma-separated list of interger values enclosed within square-brackets (e.g.: <span>[1 2 3]</span>) (e.g. <span>[1, 2, 3]</span>)</li>
+                                </ol>
+                                <p>Note: Decimal values are also accepted, but will be rounded to the nearest integer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- #carousel-roll -->
+            </div><!-- #carousel-display -->
+            <div id="carousel-dots-container">
+                <span class="carousel-dot" id="dot-1"></span>
+                <span class="carousel-dot" id="dot-2"></span>
+                <span class="carousel-dot active" id="dot-3"></span>
+                <span class="carousel-dot" id="dot-4"></span>
+                <span class="carousel-dot" id="dot-5"></span>
+                <span class="carousel-dot" id="dot-6"></span>
+            </div>
+            <div id="left-chevron" class="carousel-chevron flex">
+                <img src="./css/rightchevron.svg" alt="Previous slide">
+            </div>
+            <div id="right-chevron" class="carousel-chevron flex">
+                <img src="./css/rightchevron.svg" alt="Next slide">
+            </div>
+            <div id="carousel-dismiss"></div>
+        </div><!-- #carousel -->
+    </section><!-- #carousel-anchor -->
 </body>
 
 <script src="js/script.js"></script> <!-- "script.js" must be included before "utilities.js" as the drag-sort action mechanism depends on variables declared in "script.js" -->

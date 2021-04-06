@@ -66,26 +66,67 @@ function meanAndStdDev(arr) {
     return [arr, mean, stdDev];
 };
 
+/* For carousel system */
+const dynStyleSheet = document.createElement('style');
+document.head.appendChild(dynStyleSheet);
+const carousel = document.getElementById('carousel');
+const carouselRoll = document.getElementById('carousel-roll');
+const carouselDots = document.getElementById('carousel-dots-container').children;
+// let carouselRollPreviousPos = 0;
+let carouselRollCurrentPos = 0;
+let carouselDisplayDimen;
 
+function carouselInit() {
+    if (document.querySelector('html').clientWidth <= document.querySelector('html').clientHeight) {
+        carousel.classList.remove('rectangle');
+        carousel.classList.add('square');
+    } else {
+        carousel.classList.remove('square');
+        carousel.classList.add('rectangle');
+    }
+    carouselDisplayDimen = document.getElementById('carousel-display').getBoundingClientRect();
+    dynStyleSheet.innerHTML = `.sm-card {
+        width: ${carouselDisplayDimen.width}px;
+        height: ${carouselDisplayDimen.height}px;
+    }`;
+    carouselUpdateSlide(carouselRollCurrentPos);
+};
 
-//DEBUG LINES BELOW
-// console.log("arrSizeSliderVal: ", arrSizeSliderVal);
-// console.log("count: ", count);
-// console.log("newArrayBox.childElementCount:", newArrayBox.childElementCount);
-// console.log("width: ", width);
-// console.log("gap: ", gap);
-//DEBUG SECTION END
+function carouselUpdateSlide(position) {
+    carouselRoll.style.left = `-${position * carouselDisplayDimen.width}px`;
+    document.querySelector('.carousel-dot.active').classList.remove('active');
+    carouselDots[position].classList.add('active');
+    carouselRollCurrentPos = position;
+};
 
+function carouselNextSlide() {
+    //For use if IS using merged cards for #carousel.rectangle
+    // if (carousel.classList.contains('rectangle') && carouselRollCurrentPos == 3) carouselUpdateSlide(0);
+    // else if (carousel.classList.contains('square') && carouselRollCurrentPos == 5) carouselUpdateSlide(0);
+    // else carouselUpdateSlide(carouselRollCurrentPos + 1);
 
+    //For use if not using merged cards for #carouosel.rectangle
+    if (carouselRollCurrentPos == 5) carouselUpdateSlide(0);
+    else carouselUpdateSlide(carouselRollCurrentPos + 1);
+};
 
-//DEBUG SECTION BELOW //Testing whether Math.random() indeed generates randomly distributed numbers //!OK PASSED TEST!
-// let testCount = [0,0,0,0,0,0,0,0,0,0,0,]
-  
-// for (let i = 0; i < 1000000; i++) {
-//   testCount[Math.round(Math.random() * 10)]++;
-// }
+function carouselPreviousSlide() {
+    //For use if IS using merged cards for #carousel.rectangle
+    // if (carousel.classList.contains('rectangle') && carouselRollCurrentPos == 0) carouselUpdateSlide(3);
+    // else if (carousel.classList.contains('square') && carouselRollCurrentPos == 0) carouselUpdateSlide(5);
+    // else carouselUpdateSlide(carouselRollCurrentPos - 1);
 
-// for (let key in testCount) {
-//   console.log(`${key}: ${testCount[key]}`);
-// }
-//DEBUG SECTION END
+    //For use if not using merged cards for #carouosel.rectangle
+    if (carouselRollCurrentPos == 0) carouselUpdateSlide(5);
+    else carouselUpdateSlide(carouselRollCurrentPos - 1);
+}
+
+function carouselFini() {
+    carousel.style.display = "none";
+}
+
+//Actually executing previously defined functions and setting up the carousel system
+carouselInit();
+document.getElementById('left-chevron').onclick = carouselPreviousSlide;
+document.getElementById('right-chevron').onclick = carouselNextSlide;
+document.getElementById('carousel-dismiss').onclick = carouselFini;

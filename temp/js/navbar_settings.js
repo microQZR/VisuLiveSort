@@ -194,7 +194,10 @@ function settingsToggle(){
 let debounceID;
 window.addEventListener('resize', () => {
     clearTimeout(debounceID);
-    debounceID = setTimeout(refreshMainSec, 100);
+    debounceID = setTimeout(() => {
+        refreshMainSec(); //For adjusting the "main section" content
+        carouselInit(); //For adjusting the carousel
+    }, 100);
 });
 function refreshMainSec() {
     containerMaxWidth = document.querySelector('.main-sec-container').getBoundingClientRect().width;

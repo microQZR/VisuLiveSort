@@ -1,0 +1,25 @@
+@PG1:
+Welcome to VisuLiveSort, the ultimate visualization tool for common sorting algorithms.
+This application contains interactive features that may help the user build an intuitive understanding of the featured algorithms. See the next slides for a brief starter guide.
+
+//Color red
+WARNING! This application contains FLASHING IMAGES that may not be suitable for individual with epileptic disorders. Do not use this website if you have such or similar conditions.
+
+@PG2:
+Click on the navbar/menu to select a sorting mode.
+
+Click and open the settings box to change the size of the collection to sort and the speed of the sorting.
+
+@PG3:
+Click and drag the circular handle on each collection item to change its value.
+
+Click and drag any item of the collection to sort to reorder the collection as pleased.
+
+@PG4:
+Use the input field in the bottom section to set the items to sort to a set of custom values if desired.
+Custom values may be entered using either of the following formats:
+1. A space-separated list of integer values (e.g.: 1 2 3 4 5 6)
+2. A comma-separated list of integer values (e.g.: 1, 2, 3, 4, 5) (e.g.: 1,2,3,4,5)
+3. A space-separated or a comma-separated list of integer value enclosed within square-brackets (e.g.: [1 2 3 4]) (e.g.: [1, 2, 3, 4])
+
+Note: Decimal values are also accepted, but will be rounded to the nearest integer when processed.

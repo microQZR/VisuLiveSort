@@ -419,9 +419,10 @@ footer {
 
 /* Counting Sort Components */
 .counting-sort-container {
-    outline: 1px solid red;
+    /* outline: 1px solid red; */
     justify-content: space-evenly;
     width: 100%;
+    border-top: 1.5px solid var(--main-blue);
 }
 
 .counting-sort-subunit {

@@ -173,19 +173,19 @@ function settingsToggle(){
 
         this.style.background = "url(./css/whitecross.svg) var(--main-blue) no-repeat 6.5px";
     }
+}
 
-    //The following function positions the two div.h-slider-handle at their initial position on the first click of div#settings-toggle
-    function h_sliderHandleInitialPos() {
-        firstClick = false;
-        const sliderTrackWidth = document.querySelector('.h-slider-track').offsetWidth;
-        const handleHalfWidth = document.getElementById('size-handle').offsetWidth / 2;
-        document.getElementById('size-handle').style.left = arrSizeSliderVal * sliderTrackWidth - handleHalfWidth + "px";
-        document.getElementById('speed-handle').style.left = speedSliderVal * sliderTrackWidth - handleHalfWidth + "px";
-        setTimeout(() => {
-            document.getElementById('size-handle').style.transition = "none";
-            document.getElementById('speed-handle').style.transition = "none";
-        }, 250) //250 is the initial transition duration set in "style.css"
-    }
+//The following function positions the two div.h-slider-handle at their initial position on the first click of div#settings-toggle
+function h_sliderHandleInitialPos() {
+    firstClick = false;
+    const sliderTrackWidth = document.querySelector('.h-slider-track').offsetWidth;
+    const handleHalfWidth = document.getElementById('size-handle').offsetWidth / 2;
+    document.getElementById('size-handle').style.left = arrSizeSliderVal * sliderTrackWidth - handleHalfWidth + "px";
+    document.getElementById('speed-handle').style.left = speedSliderVal * sliderTrackWidth - handleHalfWidth + "px";
+    setTimeout(() => {
+        document.getElementById('size-handle').style.transition = "none";
+        document.getElementById('speed-handle').style.transition = "none";
+    }, 250) //250 is the initial transition duration set in "style.css"
 }
 
 
@@ -197,6 +197,7 @@ window.addEventListener('resize', () => {
     debounceID = setTimeout(() => {
         refreshMainSec(); //For adjusting the "main section" content
         carouselInit(); //For adjusting the carousel
+        h_sliderHandleInitialPos(); //For adjusting the position of the settings box slider handle if resize happens while settings box is open
     }, 100);
 });
 function refreshMainSec() {

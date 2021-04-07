@@ -429,7 +429,7 @@ function countingSort() {
         updateMainArrayContent(undefined, valsToSort);
 
         let keyCountSection = document.createElement('div');
-        keyCountSection.style.height = "35%";
+        keyCountSection.style.height = "30%";
         keyCountSection.className = "counting-sort-container flex";
         keyCountSection.insertAdjacentHTML("beforeend", `<div class="counting-sort-subunit flex title-subunit">
         <div class="counting-sort-title">Key:</div>

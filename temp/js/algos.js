@@ -66,12 +66,10 @@ function selectionSort() {
         setTimeout(e_i => e_i.style.backgroundColor = "var(--main-green)", speedInterval * tick++, elems[i]);
     }
 
-    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         enableSlideDrag();
         animationOngoing = false;
     }, speedInterval * tick++);
-    console.log(valsToSort); //This shall be removed for production.
 }
 
 //Insertion sort algorithm
@@ -116,12 +114,10 @@ function insertionSort() {
         valsToSort[j + 1] = testVal;
     }
 
-    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         enableSlideDrag();
         animationOngoing = false;
     }, speedInterval * tick++);
-    console.log(valsToSort); //This shall be removed for production.
 }
 
 //Bubble sort algorithm
@@ -178,12 +174,10 @@ function bubbleSort() {
         }
     }
 
-    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         enableSlideDrag();
         animationOngoing = false;
     }, speedInterval * tick++);
-    console.log(valsToSort); //This shall be removed for production.
 }
 
 //Merge sort algorithm
@@ -191,7 +185,6 @@ function mergeSortRecur() {
     intervalHighBound = 500;
     intervalLowBound = 160;
     calculateSpeedIntervalMerge();
-    console.log("speedInterval:", speedInterval); //This shal be removed for production.
 
     resetActiveAnimation();
 
@@ -244,10 +237,6 @@ function mergeSortRecur() {
         }, speedInterval * tick++)
 
         let i = 0, j = q + 1, k = p;
-        // setTimeout((local_i, local_j) => {
-        //     elemsBuffer[local_i].style.backgroundColor = "var(--main-magenta)";
-        //     elems[local_j].style.backgroundColor = "var(--main-magenta)";
-        // }, speedInterval * tick++, i, j);
         while (i < length_pq && j < r + 1) {
             if (buffer[i] <= valsToSort[j]) {
                 setTimeout((local_k, local_i) => {
@@ -256,7 +245,6 @@ function mergeSortRecur() {
                     elemStylePositioner(elems[local_k], local_k);
 
                     elemsBuffer[local_i].style.backgroundColor = "var(--main-green)";
-                    // if (local_i !== length_pq - 1) elemsBuffer[local_i + 1].style.backgroundColor = "var(--main-magenta)";
                 }, speedInterval * tick++, k, i);
                 valsToSort[k] = buffer[i++];
             } //If lowest element in buffer is smaller than the lowest element in the 2nd sub-array, copy the lowest element from the buffer into the next available slot of the merged array segment.
@@ -266,7 +254,6 @@ function mergeSortRecur() {
                     elemStylePositioner(elems[local_k], local_k);
 
                     elems[local_j].style.backgroundColor = "var(--main-green)";
-                    // if (local_j !== r) elems[local_j + 1].style.backgroundColor = "var(--main-magenta)";
                 }, speedInterval * tick++, k, j);
                 valsToSort[k] = valsToSort[j++]; //If the above is not true, copy the lowest element from the 2nd sub-array directly into the next available slot of the merged array segment.
             }
@@ -279,7 +266,6 @@ function mergeSortRecur() {
                 elemStylePositioner(elems[local_k], local_k);
 
                 elemsBuffer[local_i].style.backgroundColor = "var(--main-green)";
-                // if (local_i !== length_pq - 1) elemsBuffer[local_i + 1].style.backgroundColor = "var(--main-magenta)";
             }, speedInterval * tick++, k, i);
             valsToSort[k++] = buffer[i++]; //Copies the remaining elements of the buffer if the elements of the 2nd sub-array is spent. If the elements in the buffer would be spent, no need to copy over the remaining elements of the 2nd sub-array as they would be already in right place.
         }
@@ -292,7 +278,6 @@ function mergeSortRecur() {
     }
 
     mergeSort(0, valsToSort.length - 1);
-    console.log(valsToSort); //This shall be removed for production.
 
     let tickTime = speedInterval * tick;
     for (let i = 0; i <= elems.length; i++) {
@@ -317,8 +302,6 @@ function mergeSortRecur() {
         elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
     };
 
-    // setTimeout(restoreLayout, tickTime);
-    // setTimeout(enableSlideDrag, tickTime + 10);
     setTimeout(() => {
         restoreLayout();
         enableSlideDrag();
@@ -330,7 +313,6 @@ function quicksort() {
     intervalHighBound = 320;
     intervalLowBound = 85;
     calculateSpeedIntervalQuick();
-    console.log("speedInterval:", speedInterval);
 
     resetActiveAnimation();
     animationOngoing = true;
@@ -366,7 +348,6 @@ function quicksort() {
 
         setTimeout(() => {
             elems[hi].style.backgroundColor = "var(--main-magenta)";
-            // e_swapIndex.style.backgroundColor = "var(--main-magenta)";
         }, speedInterval * tick++, hi, elems[swapIndex]);
 
         for (let i = lo; i < hi; i++) {
@@ -409,7 +390,6 @@ function quicksort() {
         enableSlideDrag();
         animationOngoing = false;
     }, speedInterval * tick++);
-    console.log(valsToSort); //This shall be removed for production.
 };
 
 //Counting sort algorithm
@@ -417,7 +397,6 @@ function countingSort() {
     intervalHighBound = 345;
     intervalLowBound = 120;
     calculateSpeedIntervalCounting();
-    console.log("speedInterval:", speedInterval);
 
     resetActiveAnimation();
 
@@ -493,15 +472,11 @@ function countingSort() {
             value.parentElement.style.opacity = "100%"
             if (index !== 0) elems[index - 1].style.backgroundColor = "var(--main-green)";
             
-            // keysHTML[valsToSort[index]].style.backgroundColor = "var(--magenta-fade1)";
-            // keysHTML[valsToSort[index]].style.color = "#fff";
             keyOccurrencesHTML[valsToSort[index]].textContent = parseInt(keyOccurrencesHTML[valsToSort[index]].textContent) - 1;
             keyOccurrencesHTML[valsToSort[index]].style.textShadow = "var(--magenta-fade1) 0 0 5px";
         }, speedInterval * tick);
         tick += 0.5
         setTimeout(() => {
-            // keysHTML[valsToSort[index]].style.backgroundColor = "var(--main-yellow)";
-            // keysHTML[valsToSort[index]].style.color = "var(--main-purple)";
             keyOccurrencesHTML[valsToSort[index]].style.textShadow = "none";
         }, speedInterval * tick);
         tick += 0.5
@@ -524,11 +499,8 @@ function countingSort() {
         elems.forEach(value => value.style.backgroundColor = "var(--main-green)");
     };
 
-    // setTimeout(restoreLayout, speedInterval * tick++);
-    // setTimeout(enableSlideDrag, speedInterval * tick++);
     setTimeout(() => {
         restoreLayout();
         enableSlideDrag();
     }, speedInterval * tick++)
 }
-

@@ -1,33 +1,4 @@
-/* Testing Slider */
-.elem-container {
-    width: 30px;
-    height: 100px;
-    background-color: var(--main-blue);
-    margin: 15px 300px;
-    position: relative;
-}
-
-.elem-bar {
-    width: 10px;
-    height: 100px;
-    background-color: var(--main-green);
-    position: absolute;
-    bottom: 0px;
-    /* top: 20px; */
-    /* left: 10px; */
-}
-
-.elem-circ {
-    width: 14px;
-    height: 14px;
-    background-color: var(--main-purple);
-    /* border-radius: 50%; */
-    position: absolute;
-    top: -7px;
-    left: -2px;
-}
-
-/* Testing Drag-sort */
+/* For Testing Purposes */
 .testbox-outer {
     background-color: rgb(51, 167, 255);
     background-image:
@@ -38,32 +9,6 @@
     background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
     background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
     overflow: auto;
-}
-
-.testbox-inner {
-    margin: 45px auto;
-    position: relative;
-    border: 1px solid var(--main-green);
-    height: 142px;
-    /* Below is the correct min-width to be used for actual application; */
-    /* min-width: 200px; */
-    /* Below is the correct width to be used for actual application */
-    /* width: 80%; */
-    /* Below is the width for testing only */
-    width: 250px;
-}
-
-.testing {
-    /* margin: 0 5px; */
-    background-color: #7926ff;
-    width: 20px;
-    height: 140px;
-    display: inline-block;
-    position: absolute;
-    transition: 0.5s ease-out;
-    right: 0;
-    color: white;
-    text-align: center;
 }
 
 #test6.animate {

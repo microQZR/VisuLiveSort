@@ -18,7 +18,6 @@ let initialTimerID;
 function cancelPendingJobs() {
     let currentTimerID = setTimeout(() => {});
     for (let i = initialTimerID; i <= currentTimerID; i++) clearTimeout(i);
-    // enableSlideDrag();
 
     //For smoothly clearing up any potentially active info dialog, since the usual info dialog presentation process is also affected by the statements above
     activeInfoDialog.style.opacity = "0%";
@@ -112,7 +111,6 @@ function h_dragInit(e) {
     trackWidth = trackInfo.width;
     leftmostPos = trackInfo.left + window.scrollX; //$trackInfo.left is viewport coordinate; adding $window.scrollX converts it to document-page coordinate
     rightmostPos = trackInfo.right + window.scrollX; //$trackInfo.right is viewport coordinate; adding $window.scrollX converts it to document-page coordinate
-    // sliderBar = this.previousElementSibling; //This is the "slider bar" component controlled by the current slider handle
 
 
     document.onmouseup = h_dragFini;
@@ -129,8 +127,6 @@ function h_dragOn(e) {
     else sliderVal = 1;
 
     target.style.left = trackWidth * sliderVal - targetHalfHeight + 'px'; //Updates the position of the slider handle using CSS
-    // target.textContent = Math.round(sliderVal * maxNumVal); //Updates the number displayed within the slider handle through the HTML content
-    // sliderBar.style.height = trackHeight * sliderVal + 'px'; //Updates the position of the "slider-bar"'s height using CSS
 
     if (e.pageX >= leftmostPos && e.pageX <= rightmostPos && target.id === "size-handle") {
         arrSizeSliderVal = sliderVal;
@@ -151,7 +147,6 @@ function h_dragFini(e) {
         showInfoDialog('success-msg-1');
         console.log("speed:", sliderVal)
     }
-    // randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = sliderVal * maxNumVal;
 };
 
 //Attaching initialization event handlers

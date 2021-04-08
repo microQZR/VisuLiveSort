@@ -8,7 +8,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100%; */
 }
 
 .grid {
@@ -33,10 +32,8 @@
 }
 
 .btn:hover {
-    /* border: #318bff 2px solid; */
     background-color: #006fff;
     transform: scale(0.96);
-    /* border: var(--main-green) 2px solid; */
 }
 
 .btn:active {

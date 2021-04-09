@@ -1,3 +1,9 @@
+/**
+* Author:    microQZR <z.h.m@outlook.com>
+* Copyright: (c) 2021 microQZR
+* License:   GNU General Public License Version 3
+**/
+
 /* Attaching event handler to control buttons */
 document.getElementById('nra-btn').addEventListener('click', updateMainArrayContent);
 

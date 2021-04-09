@@ -1,3 +1,9 @@
+/**
+* Author:    microQZR <z.h.m@outlook.com>
+* Copyright: (c) 2021 microQZR
+* License:   GNU General Public License Version 3
+**/
+
 //Declarations for the speed/timer system
 let speedSliderVal = 0.5, speedInterval, intervalHighBound, intervalLowBound;
 //Utility function which calculates the timer interval for selection, insertion and bubble sorts

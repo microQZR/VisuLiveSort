@@ -1,3 +1,9 @@
+/**
+* Author:    microQZR <z.h.m@outlook.com>
+* Copyright: (c) 2021 microQZR
+* License:   GNU General Public License Version 3
+**/
+
 /*** General Utility Functions ***/
 function disableSlideDrag() {
     document.querySelectorAll('.slider-handle').forEach((element) => element.onmousedown = null); //Detaching the drag action initializer to all DOM elements with class="slider-handle"

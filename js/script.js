@@ -1,3 +1,9 @@
+/**
+* Author:    microQZR <z.h.m@outlook.com>
+* Copyright: (c) 2021 microQZR
+* License:   GNU General Public License Version 3
+**/
+
 /* Inter script common variables declarations */
 let randNumArray; //The value of $randNumArray will be defined elsewhere
 let maxNumVal = 100; //The max numerical value of the numbers array

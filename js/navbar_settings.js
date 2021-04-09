@@ -1,3 +1,9 @@
+/**
+* Author:    microQZR <z.h.m@outlook.com>
+* Copyright: (c) 2021 microQZR
+* License:   GNU General Public License Version 3
+**/
+
 /** Global declarations and inital definitions **/
 let animationOngoing = false;
 let activeSortHandle = document.getElementById('selection-sort');

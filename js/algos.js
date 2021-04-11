@@ -152,16 +152,20 @@ function bubbleSort() {
             if (j) setTimeout((e_j, e_j_plus, e_j_minus) => { //This if-else prevents an error to be thrown in case that $e_j_minus and by association $elems[j-1] is undefined
                 e_j_minus.style.backgroundColor = "var(--main-blue)";
                 e_j.style.backgroundColor = "var(--main-magenta)";
-                e_j_plus.style.backgroundColor = "var(--main-yellow)";
+                e_j.style.boxShadow = "none" //shadow
+                // e_j_plus.style.backgroundColor = "var(--main-yellow)";
+                e_j_plus.style.boxShadow = "var(--yellow-bright) 0 0 5px 3px" //shadow
             }, speedInterval * tick++, elems[j], elems[j+1], elems[j-1]);
             else setTimeout((e_j, e_j_plus) => {
                 e_j.style.backgroundColor = "var(--main-magenta)";
-                e_j_plus.style.backgroundColor = "var(--main-yellow)";
+                // e_j_plus.style.backgroundColor = "var(--main-yellow)";
+                e_j_plus.style.boxShadow = "var(--yellow-bright) 0 0 5px 3px" //shadow
             }, speedInterval * tick++, elems[j], elems[j+1], elems[j-1]);
 
             if (valsToSort[j] > valsToSort[j+1]) {
                 setTimeout((e_j, e_j_plus, local_j) => {
-                    e_j_plus.style.backgroundColor = "var(--main-blue)";
+                    // e_j_plus.style.backgroundColor = "var(--main-blue)";
+                    e_j_plus.style.boxShadow = "none" //shadow
                     e_j.parentElement.style.zIndex = 50;
                     elemStylePositioner(e_j, local_j + 1);
                     elemStylePositioner(e_j_plus, local_j);
@@ -174,6 +178,7 @@ function bubbleSort() {
 
         setTimeout((e_tail, e_tail_minus, colorLastItem) => { //Sets the sorted tail color
             e_tail.style.backgroundColor = "var(--main-green)";
+            e_tail.style.boxShadow = "none" //shadow
             e_tail_minus.style.backgroundColor = "var(--main-blue)";
             if (colorLastItem) e_tail_minus.style.backgroundColor = "var(--main-green)"; //This is to treat the special case where the smallest value is initially at the rightmost position/highest index at the beginning of the sort.
         }, speedInterval * tick++, elems[elems.length - 1 - i], elems[elems.length - 2 - i], elems.length - 2 == i);

@@ -17,7 +17,10 @@ function enableSlideDrag() {
 
 function resetArrayItemsColor() {
     elems.forEach(elem => elem.style.backgroundColor = "var(--main-blue)");
-    if (activeSortHandle.id == 'insertion-sort') elems.forEach(elem => elem.style.boxShadow = "none");
+    if (activeSortHandle.id == 'insertion-sort' || activeSortHandle.id == 'bubble-sort') elems.forEach(elem => {
+        elem.style.boxShadow = "none";
+        elem.parentElement.style.zIndex = "auto";
+    });
 }
 
 let initialTimerID;

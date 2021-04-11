@@ -186,11 +186,11 @@ function arraysUpdateOnDrag(oldIndex, newIndex) {
 function dragSortInit(e) {
     e.preventDefault();
 
-    oldIndex = Math.floor((e.pageX - elemsContainerDimen.left) / (arrElemWidth + arrElemGap));
     target2 = this; //Registers the active DOM element being dragged 
+    oldIndex = parseInt(target2.parentElement.getAttribute('data-currentindex')); //This fixes issue of main array items stacking when multiple of these are selected in rapid succession.
 
     //Sets special CSS style for the active DOM element being dragged !AND ITS PARENT!
-    target2.parentElement.style.zIndex = 100; //Applying CSS property on the parent instead
+    target2.parentElement.style.zIndex = 50; //Applying CSS property on the parent instead
     target2.parentElement.style.transition = 'none'; //Applying CSS property on the parent instead
     target2.style.boxShadow = '0px 0px 5px 5px var(--main-green)';
     document.getElementById('main-array').style.cursor = 'pointer';
@@ -204,10 +204,12 @@ function dragSortInit(e) {
 function dragSortOn(e) {
     e.preventDefault();
     
-    if (e.clientX <= elemsContainerDimen.left || e.clientX >= elemsContainerDimen.right) return; //This bounds the drag-sort motion of the active DOM element to within its DOM container.
-
     //Below is for the proper positioning of all affected DOM elements upon drag over
-    let newIndex = Math.floor((e.pageX - elemsContainerDimen.left) / (arrElemWidth + arrElemGap));
+    let newIndex;
+    if (e.clientX <= elemsContainerDimen.left) newIndex = 0; //This line and the next bounds the drag-sort motion of the active DOM element to within its DOM container.
+    else if (e.clientX >= elemsContainerDimen.right) newIndex = elems.length - 1;
+    else newIndex = Math.floor((e.pageX - elemsContainerDimen.left) / (arrElemWidth + arrElemGap));
+    
     elemStylePositioner(target2, newIndex); //Updates the position of the active DOM element.
     //Update the position of the non-active DOM elements !ONLY! if the value of $newIndex has changed in order to save some compute.
     if (oldIndex !== newIndex) {

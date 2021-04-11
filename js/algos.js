@@ -93,7 +93,10 @@ function insertionSort() {
 
     for (let i = 1; i < valsToSort.length; i++) {
         let j, testVal = valsToSort[i], focusedElement = elems[i];
-        setTimeout(() => focusedElement.style.backgroundColor = "var(--main-magenta)", speedInterval * tick++);
+        setTimeout(() => {
+            focusedElement.style.backgroundColor = "var(--main-magenta)";
+            focusedElement.parentElement.style.zIndex = 50;
+        }, speedInterval * tick++);
         for (j = i - 1; j >= 0; j--) {
             // setTimeout(e_j => e_j.style.backgroundColor = "var(--main-yellow)", speedInterval * tick++, elems[j]);
             setTimeout(e_j => e_j.style.boxShadow = "var(--yellow-fade2) 0 0 5px 3px", speedInterval * tick++, elems[j]);
@@ -105,13 +108,17 @@ function insertionSort() {
                     elemStylePositioner(e_j, local_j + 1);
                     e_j.style.backgroundColor = "var(--main-green)";
                     e_j.style.boxShadow = "none";
-                    if (local_j === 0) focusedElement.style.backgroundColor = "var(--main-green)";
+                    if (local_j === 0) {
+                        focusedElement.style.backgroundColor = "var(--main-green)";
+                        focusedElement.parentElement.style.zIndex = 0;
+                    }
                 }, speedInterval * tick++, j, elems[j]);
             } else {
                 setTimeout(e_j => {
                     e_j.style.backgroundColor = "var(--main-green)";
                     e_j.style.boxShadow = "none";
                     focusedElement.style.backgroundColor = "var(--main-green)";
+                    focusedElement.parentElement.style.zIndex = 0;
                 }, speedInterval * tick++, elems[j]);
                 break;
             }
@@ -155,6 +162,7 @@ function bubbleSort() {
             if (valsToSort[j] > valsToSort[j+1]) {
                 setTimeout((e_j, e_j_plus, local_j) => {
                     e_j_plus.style.backgroundColor = "var(--main-blue)";
+                    e_j.parentElement.style.zIndex = 50;
                     elemStylePositioner(e_j, local_j + 1);
                     elemStylePositioner(e_j_plus, local_j);
                 }, speedInterval * tick++, elems[j], elems[j+1], j);
@@ -181,6 +189,7 @@ function bubbleSort() {
     }
 
     setTimeout(() => {
+        elems.forEach(value => value.parentElement.style.zIndex = "auto");
         enableSlideDrag();
         animationOngoing = false;
     }, speedInterval * tick++);

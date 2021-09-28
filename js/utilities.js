@@ -63,7 +63,11 @@ function dragInit(e) {
     lowestPos = trackInfo.bottom + window.scrollY; //$trackInfo.bottom is viewport coordinate; adding $window.scrollY converts it to document-page coordinate
     sliderBar = this.previousElementSibling; //This is the "slider bar" component controlled by the current slider handle
 
+    //Add decorative styles to slider handle
+    target.style.boxShadow = '0px 0px 0px 8px rgba(0, 0, 0, 0.25)';
+    target.style.zIndex = 1;
 
+    //Attach motion event handlers
     document.onmouseup = dragFini;
     document.onmousemove = dragOn;
 };
@@ -86,8 +90,14 @@ function dragOn(e) {
 
 //Drag action termination event handler
 function dragFini(e) {
+    //Detach motion event handlers
     document.onmouseup = null;
     document.onmousemove = null;
+
+    //Reset decorative styles
+    target.style.boxShadow = null;
+    target.style.zIndex = null;
+
     if (hasNotMoved) return;
 
     randNumArray[parseInt(target.parentElement.getAttribute('data-currentindex'))] = Math.round(sliderVal * maxNumVal);
@@ -95,7 +105,6 @@ function dragFini(e) {
     let roundedSliderVal = Math.round(sliderVal * maxNumVal) / maxNumVal;
     target.style.top = trackHeight * (1 - roundedSliderVal) - targetHalfHeight + 'px'; //Updates the position of the slider handle using CSS
     sliderBar.style.height = trackHeight * roundedSliderVal + 'px'; //Updates the position of the "slider-bar"'s height using CSS
-
 };
 
 //Attaching initialization event handlers

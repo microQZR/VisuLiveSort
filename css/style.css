@@ -38,7 +38,7 @@ ul {
 
 /* Header & Navbar */
 header {
-    background-color: var(--main-purple);
+    background: linear-gradient(45deg, rgba(0, 255, 189, 0.8) 0%, #6300FF 37.91%, #40C6FF 98.36%), #6300FF;
     overflow: auto;
     height: 12vh;
 }
@@ -222,18 +222,29 @@ header nav, header ul, header li {
 }
 
 #settings-toggle {
-    background: url(cog.svg) var(--main-blue) no-repeat -16px;
+    background: url(cog.svg) var(--main-blue) no-repeat center;
     border-radius: 100%;
+    box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.25);
 
     position: absolute;
-    top: -17px;
-    right: -17px;
+    top: -22.5px;
+    right: -22.5px;
 
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
 
-    opacity: 35%;
+    opacity: 50%;
     cursor: pointer;
+}
+
+.settings-label {
+    position: absolute;
+    top: 15px;
+    right: 125%;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--main-blue);
+    transition: 0.5s;
 }
 
 #settings-toggle:hover, .open #settings-toggle {
@@ -243,9 +254,9 @@ header nav, header ul, header li {
 #settings-container {
     display: none;
 
-    height: 85%;
+    flex: 1;
 
-    grid-template-rows: 2fr 2fr 1fr 2fr 2fr;
+    grid-template-rows: 1.5fr 1.5fr 1fr 2fr 2fr;
     grid-template-columns: repeat(4, 1fr);
 }
 
@@ -253,7 +264,7 @@ header nav, header ul, header li {
 	width: 100%;
     justify-content: space-between;
     text-align: right; /* this is not effective */
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .h-slider-track {
@@ -282,27 +293,30 @@ header nav, header ul, header li {
 }
 
 #settings-subtitle {
-    color: #ff4db5;
-    font-weight: 600;
-    font-weight: bold;
+    color: #36008C;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 #settings-complexity {
     flex-direction: column;
     height: 100%;
     justify-content: space-evenly;
+    align-items: flex-start;
 }
 
 #settings-complexity > *:first-child {
-    color: #ff4db5;
-    font-weight: 500;
-    text-align: center;
+    color: #36008C;
+    font-weight: 700;
+    text-transform: capitalize;
 }
 
 #settings-inplace, #settings-stable {
     width: 110%;
     justify-content: flex-end;
     text-align: right;
+    font-weight: 600;
+    margin-left: 0.7em;
 }
 
 #inplace-status {
@@ -338,6 +352,15 @@ header nav, header ul, header li {
 .control {
     margin: 0 20px;
     text-align: right;
+}
+
+.control-label {
+    font-weight: 500;
+    color: rgba(0,0,0,0.75);
+}
+
+.controls-sec .btn {
+    font-size: 18px;
 }
 
 #manual-array {
@@ -394,10 +417,13 @@ footer {
     border-radius: 50%;
     position: absolute;
     color: white;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
 }
 
 .slider-circ:hover {
     cursor: pointer;
+    box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.25);
+    z-index: 1;
 }
 
 /* Drag-sort Components */
@@ -520,9 +546,9 @@ footer {
 }
 
 #carousel {
-    border: 3.5px solid var(--main-blue);
+    border: 4px solid var(--main-blue);
     border-radius: 35px;
-    box-shadow: var(--main-blue) 0 0 20px 0px;
+    box-shadow: 0 0 25px 2px #9A9A9A;
     position: fixed;
     top: 5vh;
     flex-direction: column;
@@ -611,21 +637,6 @@ footer {
     width: 40px;
     height: 40px;
 
-    cursor: pointer;
-}
-
-#settings-toggle {
-    background: url(cog.svg) var(--main-blue) no-repeat -16px;
-    border-radius: 100%;
-
-    position: absolute;
-    top: -17px;
-    right: -17px;
-
-    width: 35px;
-    height: 35px;
-
-    opacity: 35%;
     cursor: pointer;
 }
 
@@ -801,6 +812,10 @@ footer {
         height: auto;
         padding-bottom: 10px;
         background-color: #36008c;
+        color: #fff;
+    }
+
+    .control-label {
         color: #fff;
     }
 

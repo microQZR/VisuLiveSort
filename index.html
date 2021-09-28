@@ -1,4 +1,4 @@
-<!-- VisuLiveSort, a visualization tool for common sorting algorithms. Created by microQZR (z.h.m@outlook.com). Copyright (C) 2021 microQZR. This is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation (See the GNU General Public License for more details.) -->
+<!-- VisuLiveSort, a visualization tool for common sorting algorithms. Created by microQZR (zi.han.meng100@gmail.com). Copyright (C) 2021 microQZR. This is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3 as published by the Free Software Foundation (See the GNU General Public License for more details.) -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,8 +40,10 @@
 
             <!-- Settings Box -->
             <div id="settings-box" class="flex">
-                <div id="settings-toggle"></div>
-                <div id="settings-container" class="container grid">
+                <div id="settings-toggle" class="flex">
+                    <div class="settings-label">SETTINGS</div>
+                </div>
+                <div id="settings-container" class="grid">
                     <div id="settings-size" class="flex" style="grid-column: 1 / span 4;">
                         <div>Size:</div>
                         <div class="h-slider-track"><div id="size-handle" class="h-slider-handle"></div></div>
@@ -74,7 +76,7 @@
         <hr class="container">
         <div class="grid container">
             <form class="control flex" id="manual-array-form">
-                <label for="manual-array">Manual<br>Input Array</label>
+                <label for="manual-array" class="control-label">Manual<br>Input Array</label>
                 <fieldset id="manual-array-fs">
                     <legend>Input is invalid!</legend>
                     <input type="text" name="manual-array" id="manual-array" class="m-12px">
@@ -82,15 +84,15 @@
                 <button type="submit" class="btn" id="manual-array-btn">GO!</button>
             </form>
             <div class="control flex" id="nra-control">
-                <span>New Random Array</span>
+                <span class="control-label">New Random Array</span>
                 <button class="btn m-12px" id="nra-btn">GO!</button>
             </div>
             <div class="control" id="reshuffle-control">
-                <span>Reshuffle</span>
+                <span class="control-label">Reshuffle</span>
                 <button class="btn m-12px" id="reshuffle-btn">GO!</button>
             </div>
             <div class="control" id="start-sort-control">
-                <span>Start Sort</span>
+                <span class="control-label">Start Sort</span>
                 <button class="btn m-12px" id="start-sort-btn">GO!</button>
             </div>
         </div>
@@ -98,7 +100,7 @@
 
     <!-- Footer Section -->
     <footer>
-        <div class="footer">Copyright &copy; microQZR 2021</div>
+        <div class="footer">Copyright 2021 &copy; microQZR</div>
     </footer>
 
     <!-- Informational Dialogs Section -->

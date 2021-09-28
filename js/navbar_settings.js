@@ -162,8 +162,10 @@ function settingsToggle(){
         settingsBox.style.width = 0;
         settingsBox.style.minHeight = 0;
         settingsBox.style.minWidth = 0;
+        settingsBox.style.padding = null;
 
-        this.style.background = "url(./css/cog.svg) var(--main-blue) no-repeat -16px";
+        this.style.background = "url(./css/cog.svg) var(--main-blue) no-repeat center";
+        document.querySelector('.settings-label').style.top = '15px';
     } else {
         settingsBox.classList.add('open');
 
@@ -171,13 +173,15 @@ function settingsToggle(){
         settingsBox.style.width = "35%";
         settingsBox.style.minHeight = "300px";
         settingsBox.style.minWidth = "300px";
+        settingsBox.style.padding = '2.5em';
         
         setTimeout(() => {
             settingsContainer.style.display = "grid";
             if (firstClick) setTimeout(() => h_sliderHandleInitialPos(), 275); //275 is an empirical finding which is the minimum delay required so that the two div.h-slider-handle can be placed at their actual correct position (i.e. not less).
         }, 200)
 
-        this.style.background = "url(./css/whitecross.svg) var(--main-blue) no-repeat 6.5px";
+        this.style.background = "url(./css/whitecross.svg) var(--main-blue) no-repeat center";
+        document.querySelector('.settings-label').style.top = 0;
     }
 }
 

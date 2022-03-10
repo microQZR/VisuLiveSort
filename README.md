@@ -18,6 +18,6 @@ __Featured algorithms currently include__:
 * Quicksort
 * Counting sort
 
-*__See a live demo of this application here:__* https://microqzr.github.io/VisuLiveSort/
+*__See a live demo of this application here:__* https://zymzy.github.io/VisuLiveSort/
 
-If you find any bug or have suggestions for improvement please file an issue with this project's GitHub [repository](https://github.com/microQZR/VisuLiveSort) or email me at z.h.m@outlook.com. Thank you!
+If you find any bug or have suggestions for improvement please file an issue with this project's GitHub [repository](https://github.com/zymzy/VisuLiveSort) or email me at zi.han.meng100@gmail.com. Thank you!

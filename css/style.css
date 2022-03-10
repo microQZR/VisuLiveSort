@@ -1,6 +1,6 @@
 /**
-* Author:    microQZR <z.h.m@outlook.com>
-* Copyright: (c) 2021 microQZR
+* Author:    Zi Han Meng <zi.han.meng100@gmail.com>
+* Copyright: (c) 2021 Zi Han Meng
 * License:   GNU General Public License Version 3
 **/
 
